@@ -9,6 +9,8 @@
     --ink-2: #121214;
     --bone: #f4f1ea;
     --bone-2: #faf8f5;
+    --parchment: #ede8df;
+    --carbon: #0d0d10;
     --text: #f5f5f7;
     --muted: #8e8e93;
     --ink-text: #18181a;
@@ -74,7 +76,7 @@ body::after {
     inset: 0;
     z-index: 9990;
     pointer-events: none;
-    opacity: 0.04;
+    opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 200px 200px;
     mix-blend-mode: overlay;
@@ -98,6 +100,50 @@ body::after {
     letter-spacing: 0.24em;
     text-transform: uppercase;
     line-height: 1.6;
+}
+
+/* Serif section label — breaks mono-eyebrow monotony */
+.section-label {
+    font-family: "Cormorant Garamond", ui-serif, serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--dust);
+    line-height: 1.4;
+}
+@media (min-width: 1024px) {
+    .section-label {
+        font-size: 16px;
+    }
+}
+
+/* Editorial divider — thin line with diamond motif */
+.editorial-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+.editorial-divider::before,
+.editorial-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200, 96, 58, 0.3), transparent);
+}
+.editorial-divider .diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--copper);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+/* Text balance for better headline wraps */
+.text-balance {
+    text-wrap: balance;
 }
 
 /* ─── Buttons ─────────────────────────────────────── */

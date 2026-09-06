@@ -22,7 +22,7 @@ const FilterChip = ({ label, active, onClick, testid }) => (
     aria-pressed={active}
     className={cn(
       "relative font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 pb-1",
-      active ? "text-copper" : "text-graphite hover:text-onyx"
+      active ? "text-copper" : "text-dust hover:text-bone"
     )}
   >
     {label}
@@ -112,21 +112,27 @@ const PatentRow = ({ p, i }) => {
   );
 };
 
-// Status summary counts
+// Enhanced status summary with larger numbers
 const StatusSummary = () => {
   const counts = PAT_STATUSES.map((s) => ({
     status: s,
     count: PATENTS.filter((p) => p.status === s).length,
   }));
   return (
-    <div className="flex flex-wrap gap-6 border-b border-white/08 pb-8 mb-8">
-      {counts.map(({ status, count }) => (
-        <div key={status} className="flex items-baseline gap-3">
-          <span className="font-display text-3xl font-bold text-bone">{count}</span>
-          <StatusBadge status={status} />
+    <Reveal>
+      <div className="flex flex-wrap gap-x-12 gap-y-6 border-b border-white/08 pb-10 mb-10">
+        {counts.map(({ status, count }) => (
+          <div key={status} className="flex items-baseline gap-4">
+            <span className="font-display text-4xl font-bold text-bone lg:text-5xl">{count}</span>
+            <StatusBadge status={status} />
+          </div>
+        ))}
+        <div className="flex items-baseline gap-4 ml-auto">
+          <span className="font-display text-4xl font-bold text-copper lg:text-5xl">79</span>
+          <span className="eyebrow text-dust">Total Filings</span>
         </div>
-      ))}
-    </div>
+      </div>
+    </Reveal>
   );
 };
 
@@ -150,18 +156,16 @@ export default function Patents() {
     <main data-testid="page-patents">
       {/* Header */}
       <section className="min-h-[50svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
-        <div className="grid grid-cols-12 gap-x-4 gap-y-12">
-          <div className="col-span-12 eyebrow text-dust lg:col-span-2">IP Archive</div>
-          <div className="col-span-12 lg:col-span-9 lg:col-start-3">
-            <SplitLines
-              as="h1"
-              lines={["79 patent", "filings."]}
-              delay={0.3}
-              data-testid="page-patents-title"
-              className="font-display text-[clamp(3rem,9.5vw,11rem)] font-bold uppercase leading-[0.86] tracking-[-0.045em]"
-            />
-          </div>
-          <Reveal delay={0.5} className="col-span-12 lg:col-span-5 lg:col-start-7">
+        <div className="relative z-10">
+          <span className="section-label">Intellectual property portfolio</span>
+          <SplitLines
+            as="h1"
+            lines={["79 patent", "filings."]}
+            delay={0.3}
+            data-testid="page-patents-title"
+            className="mt-4 font-display text-[clamp(3rem,9.5vw,11rem)] font-bold uppercase leading-[0.86] tracking-[-0.045em]"
+          />
+          <Reveal delay={0.5} className="mt-10 max-w-2xl lg:ml-auto lg:max-w-xl">
             <p className="text-base leading-relaxed text-dust sm:text-lg">
               Fourteen granted patents and a portfolio of PCT/US and Indian applications spanning polymorphic forms, cocrystals, salts, amorphous dispersions and particle engineering processes.
             </p>
@@ -169,7 +173,7 @@ export default function Patents() {
         </div>
       </section>
 
-      {/* Archive */}
+      {/* Archive — kept on dark for differentiation from Publications */}
       <section className="bg-ink px-6 py-16 text-bone lg:px-12 lg:py-24">
         <StatusSummary />
 

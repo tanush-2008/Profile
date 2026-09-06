@@ -4,7 +4,6 @@ import { Metrics } from "@/sections/Scale";
 import { Pipeline } from "@/sections/Pipeline";
 import { SelectedWork } from "@/sections/CaseStudy";
 import { Statement } from "@/sections/Philosophy";
-import { Marquee } from "@/sections/Marquee";
 import { FinalCTA } from "@/sections/FinalCTA";
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
       <Pipeline />
       <SelectedWork />
       <Statement />
-      <Marquee />
       <FinalCTA />
     </main>
   );

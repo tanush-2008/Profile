@@ -11,6 +11,8 @@ export default {
         "ink-2": "var(--ink-2)",
         bone: "var(--bone)",
         "bone-2": "var(--bone-2)",
+        parchment: "var(--parchment)",
+        carbon: "var(--carbon)",
         text: "var(--text)",
         muted: "hsl(var(--muted))",
         "ink-text": "var(--ink-text)",

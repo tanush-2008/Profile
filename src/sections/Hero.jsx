@@ -61,7 +61,7 @@ export const Hero = () => {
           <div className="col-span-6 lg:col-span-3">Pharmaceutical Scientist</div>
           <div className="hidden lg:col-span-3 lg:block">Researcher · Inventor</div>
           <div className="col-span-6 text-right lg:col-span-3 lg:text-left">Hyderabad, India</div>
-          <div className="hidden lg:col-span-3 lg:block lg:text-right">~20 Years R&amp;D</div>
+          <div className="hidden lg:col-span-3 lg:block lg:text-right">Two Decades in R&amp;D</div>
         </motion.div>
 
         {/* Main headline */}
@@ -92,7 +92,7 @@ export const Hero = () => {
           </div>
 
           {/* Right column — descriptor + CTA */}
-          <div className="col-span-12 mt-12 max-w-sm lg:col-span-3 lg:mt-0 lg:pb-3 lg:pl-4">
+          <div className="col-span-12 mt-12 max-w-[22rem] lg:col-span-3 lg:mt-0 lg:pb-3 lg:pl-4">
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.7, duration: 1 }}
-          className="mt-14 lg:mt-20"
+          className="mt-10 lg:mt-14"
         >
           <div className="border-t border-white/12 pt-5 flex flex-wrap items-start gap-6 sm:gap-10">
             {METRICS.map((m, i) => (

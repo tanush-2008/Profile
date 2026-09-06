@@ -105,20 +105,25 @@ export const Nav = () => {
                 data-testid={`nav-link-${n.id}`}
                 className={({ isActive }) =>
                   cn(
-                    "link-underline font-mono text-[10px] uppercase tracking-[0.22em] transition-colors duration-300 hover:text-bone",
+                    "group relative font-mono text-[10px] uppercase tracking-[0.22em] transition-colors duration-300 hover:text-bone pb-1",
                     isActive ? "text-bone is-active" : "text-dust"
                   )
                 }
               >
                 {n.label}
+                {/* Active indicator */}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 h-[1.5px] w-full bg-copper origin-left transition-transform duration-500",
+                  "scale-x-0 group-hover:scale-x-100 group-[.is-active]:scale-x-100"
+                )} />
               </NavLink>
             ))}
           </nav>
 
           <div className="flex items-center gap-6">
-            {/* Status indicator */}
-            <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-dust md:flex">
-              <span className="h-1.5 w-1.5 bg-copper pulse-dot" />
+            {/* Status indicator — reduced weight */}
+            <span className="hidden items-center gap-2 font-mono text-[9px] uppercase tracking-[0.15em] text-dust md:flex">
+              <span className="h-1 w-1 bg-copper pulse-dot" />
               Hyderabad
             </span>
             {/* Collaborate CTA */}
