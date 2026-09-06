@@ -9,13 +9,24 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Cursor } from "@/components/Cursor";
 import { EASE } from "@/components/motion";
-import { RequestAccessProvider } from "@/components/RequestAccess";
 import Home from "@/pages/Home";
-import Subpage from "@/pages/Subpage";
 import Research from "@/pages/Research";
-import Inbox from "@/pages/Inbox";
+import Innovation from "@/pages/Innovation";
+import Publications from "@/pages/Publications";
+import Patents from "@/pages/Patents";
+import Career from "@/pages/Career";
+import Contact from "@/pages/Inbox";
 
-const LABELS = { "/": "Index", "/technology": "Technology", "/applications": "Applications", "/research": "Research", "/company": "Company", "/inbox": "Inbox" };
+const LABELS = {
+  "/":             "Home",
+  "/research":     "Research",
+  "/innovation":   "Innovation",
+  "/publications": "Publications",
+  "/patents":      "Patents",
+  "/career":       "Career",
+  "/contact":      "Contact",
+};
+
 const COVER_MS = 700;
 
 const useLenis = () => {
@@ -30,14 +41,30 @@ const useLenis = () => {
 };
 
 const Curtain = ({ covering, label }) => (
-  <motion.div data-testid="page-curtain" data-state={covering ? "covering" : "idle"} aria-hidden
+  <motion.div
+    data-testid="page-curtain"
+    data-state={covering ? "covering" : "idle"}
+    aria-hidden
     className="pointer-events-none fixed inset-0 z-[80] flex items-end justify-between bg-ink px-6 pb-8 text-bone lg:px-12 lg:pb-10"
     style={{ transformOrigin: covering ? "bottom" : "top" }}
     initial={false}
     animate={{ scaleY: covering ? 1 : 0 }}
-    transition={{ duration: COVER_MS / 1000, ease: EASE }}>
-    <motion.span className="eyebrow" animate={{ opacity: covering ? 1 : 0 }} transition={{ duration: 0.3, delay: covering ? 0.3 : 0 }}>→ {label}</motion.span>
-    <motion.span className="font-display text-sm font-bold tracking-[0.22em]" animate={{ opacity: covering ? 1 : 0 }} transition={{ duration: 0.3, delay: covering ? 0.3 : 0 }}>AURELIS</motion.span>
+    transition={{ duration: COVER_MS / 1000, ease: EASE }}
+  >
+    <motion.span
+      className="eyebrow"
+      animate={{ opacity: covering ? 1 : 0 }}
+      transition={{ duration: 0.3, delay: covering ? 0.3 : 0 }}
+    >
+      → {label}
+    </motion.span>
+    <motion.span
+      className="font-display text-sm font-bold tracking-[0.22em]"
+      animate={{ opacity: covering ? 1 : 0 }}
+      transition={{ duration: 0.3, delay: covering ? 0.3 : 0 }}
+    >
+      V. PEDDY
+    </motion.span>
   </motion.div>
 );
 
@@ -67,14 +94,15 @@ const AnimatedRoutes = () => {
   return (
     <>
       <Routes location={displayed}>
-        <Route path="/" element={<PageShell><Home /></PageShell>} />
-        <Route path="/technology" element={<PageShell><Subpage id="technology" /></PageShell>} />
-        <Route path="/applications" element={<PageShell><Subpage id="applications" /></PageShell>} />
-        <Route path="/research" element={<PageShell><Research /></PageShell>} />
-        <Route path="/company" element={<PageShell><Subpage id="company" /></PageShell>} />
-        <Route path="/inbox" element={<PageShell><Inbox /></PageShell>} />
+        <Route path="/"             element={<PageShell><Home /></PageShell>} />
+        <Route path="/research"     element={<PageShell><Research /></PageShell>} />
+        <Route path="/innovation"   element={<PageShell><Innovation /></PageShell>} />
+        <Route path="/publications" element={<PageShell><Publications /></PageShell>} />
+        <Route path="/patents"      element={<PageShell><Patents /></PageShell>} />
+        <Route path="/career"       element={<PageShell><Career /></PageShell>} />
+        <Route path="/contact"      element={<PageShell><Contact /></PageShell>} />
       </Routes>
-      <Curtain covering={covering} label={LABELS[location.pathname] || "Index"} />
+      <Curtain covering={covering} label={LABELS[location.pathname] || "Home"} />
     </>
   );
 };
@@ -84,12 +112,16 @@ function App() {
   return (
     <div className="App bg-ink" id="top">
       <BrowserRouter>
-        <RequestAccessProvider>
-          <Nav />
-          <AnimatedRoutes />
-          <Cursor />
-          <Toaster theme="dark" position="bottom-right" toastOptions={{ className: "rounded-none border-white/15 bg-ink-2 text-bone font-sans" }} />
-        </RequestAccessProvider>
+        <Nav />
+        <AnimatedRoutes />
+        <Cursor />
+        <Toaster
+          theme="dark"
+          position="bottom-right"
+          toastOptions={{
+            className: "rounded-none border-white/15 bg-ink-2 text-bone font-sans",
+          }}
+        />
       </BrowserRouter>
     </div>
   );

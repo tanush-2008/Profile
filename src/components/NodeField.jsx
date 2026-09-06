@@ -1,32 +1,42 @@
 import { useEffect, useRef } from "react";
 
-const COLS = 9, ROWS = 6;
+// Crystal lattice visualisation — unit cell grid with animated bond vibration
+// Replaces the AURELIS network graph with a pharmaceutical crystal lattice
 
-const buildGraph = (w, h) => {
-  const pad = Math.min(w, h) * 0.1;
+const UNIT_A = 7, UNIT_B = 6;
+
+const buildLattice = (w, h) => {
+  const pad = Math.min(w, h) * 0.08;
   const nodes = [];
-  for (let j = 0; j < ROWS; j++)
-    for (let i = 0; i < COLS; i++) {
-      const jx = (Math.sin(i * 12.9 + j * 78.2) * 0.5) * 0.35;
-      const jy = (Math.cos(i * 43.1 + j * 9.7) * 0.5) * 0.35;
+  for (let j = 0; j < UNIT_B; j++) {
+    for (let i = 0; i < UNIT_A; i++) {
+      // slight jitter to simulate thermal ellipsoids
+      const jx = (Math.sin(i * 11.7 + j * 73.4) * 0.5) * 0.18;
+      const jy = (Math.cos(i * 39.2 + j * 11.1) * 0.5) * 0.18;
       nodes.push({
-        x: pad + ((i + 0.5 + jx) / COLS) * (w - pad * 2),
-        y: pad + ((j + 0.5 + jy) / ROWS) * (h - pad * 2),
-        heat: Math.random(),
+        x: pad + ((i + 0.5 + jx) / UNIT_A) * (w - pad * 2),
+        y: pad + ((j + 0.5 + jy) / UNIT_B) * (h - pad * 2),
         phase: Math.random() * Math.PI * 2,
+        type: (i + j) % 3 === 0 ? "heavy" : (i + j) % 3 === 1 ? "light" : "mid",
       });
     }
-  const edges = [];
+  }
+  const bonds = [];
   nodes.forEach((n, idx) => {
-    const i = idx % COLS, j = Math.floor(idx / COLS);
-    if (i < COLS - 1) edges.push([idx, idx + 1]);
-    if (j < ROWS - 1) edges.push([idx, idx + COLS]);
-    if (i < COLS - 1 && j < ROWS - 1 && (i + j) % 3 === 0) edges.push([idx, idx + COLS + 1]);
+    const i = idx % UNIT_A, j = Math.floor(idx / UNIT_A);
+    if (i < UNIT_A - 1) bonds.push([idx, idx + 1, "short"]);
+    if (j < UNIT_B - 1) bonds.push([idx, idx + UNIT_A, "long"]);
+    if (i < UNIT_A - 1 && j < UNIT_B - 1 && (i + j) % 2 === 0) {
+      bonds.push([idx, idx + UNIT_A + 1, "diagonal"]);
+    }
+    if (i > 0 && j < UNIT_B - 1 && (i + j) % 3 === 0) {
+      bonds.push([idx, idx + UNIT_A - 1, "diagonal"]);
+    }
   });
-  return { nodes, edges };
+  return { nodes, bonds };
 };
 
-export const NodeField = ({ mode = "cluster-mesh" }) => {
+export const NodeField = ({ mode = "polymorphism" }) => {
   const ref = useRef(null);
   const modeRef = useRef(mode);
   modeRef.current = mode;
@@ -34,79 +44,86 @@ export const NodeField = ({ mode = "cluster-mesh" }) => {
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas.getContext("2d");
-    let w = 0, h = 0, raf = 0, t = 0, graph = null, packets = [];
+    let w = 0, h = 0, raf = 0, t = 0, lattice = null;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      graph = buildGraph(w, h);
-      packets = Array.from({ length: 28 }, () => ({
-        e: Math.floor(Math.random() * graph.edges.length),
-        p: Math.random(),
-        v: 0.004 + Math.random() * 0.006,
-        dir: Math.random() > 0.5 ? 1 : -1,
-      }));
+      lattice = buildLattice(w, h);
     };
 
     const draw = () => {
-      t += 0.016;
-      const m = modeRef.current;
+      t += 0.012;
       ctx.clearRect(0, 0, w, h);
-      const { nodes, edges } = graph;
+      const { nodes, bonds } = lattice;
 
-      // faint dot grid
-      ctx.fillStyle = "rgba(255,255,255,0.05)";
-      for (let x = 0; x < w; x += 24) for (let y = 0; y < h; y += 24) ctx.fillRect(x, y, 1, 1);
-
-      // edges
-      ctx.lineWidth = 1;
-      edges.forEach(([a, b], k) => {
-        const A = nodes[a], B = nodes[b];
-        let alpha = 0.12;
-        if (m === "cluster-mesh") alpha = 0.10 + 0.08 * (0.5 + 0.5 * Math.sin(t * 0.8 + k * 0.4));
-        if (m === "thermal-dynamics") alpha = 0.06;
-        if (m === "data-movement") alpha = 0.16;
-        ctx.strokeStyle = `rgba(245,245,247,${alpha})`;
-        ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
-      });
-
-      // packets
-      const speed = m === "data-movement" ? 2.2 : m === "cluster-mesh" ? 1 : 0.5;
-      packets.forEach((pk) => {
-        pk.p += pk.v * speed * pk.dir;
-        if (pk.p > 1 || pk.p < 0) {
-          pk.e = Math.floor(Math.random() * edges.length);
-          pk.p = pk.dir > 0 ? 0 : 1;
+      // Background grid — crystal paper
+      ctx.fillStyle = "rgba(255,255,255,0.03)";
+      for (let x = 0; x < w; x += 20) {
+        for (let y = 0; y < h; y += 20) {
+          ctx.fillRect(x, y, 1, 1);
         }
-        const [a, b] = edges[pk.e];
-        const A = nodes[a], B = nodes[b];
-        const x = A.x + (B.x - A.x) * pk.p, y = A.y + (B.y - A.y) * pk.p;
-        ctx.fillStyle = m === "data-movement" ? "rgba(224,109,59,0.9)" : "rgba(245,245,247,0.8)";
-        ctx.fillRect(x - 1.5, y - 1.5, 3, 3);
-      });
+      }
 
-      // nodes
-      nodes.forEach((n, i) => {
-        if (m === "thermal-dynamics") {
-          n.heat += (0.5 + 0.5 * Math.sin(t * 0.6 + n.phase) - n.heat) * 0.02;
-          const r = 3 + n.heat * 9;
-          ctx.fillStyle = `rgba(224,109,59,${0.08 + n.heat * 0.35})`;
-          ctx.fillRect(n.x - r, n.y - r, r * 2, r * 2);
-          ctx.fillStyle = `rgba(245,245,247,${0.5 + n.heat * 0.5})`;
-          ctx.fillRect(n.x - 1.5, n.y - 1.5, 3, 3);
+      // Bonds
+      bonds.forEach(([a, b, type]) => {
+        const A = nodes[a], B = nodes[b];
+        const phase = (A.phase + B.phase) / 2;
+        const vibrate = Math.sin(t * 1.4 + phase) * 0.5 + 0.5;
+        let alpha, dash, width;
+        if (type === "diagonal") {
+          alpha = 0.04 + vibrate * 0.04;
+          dash = [2, 4]; width = 0.5;
+        } else if (type === "long") {
+          alpha = 0.08 + vibrate * 0.06;
+          dash = []; width = 0.8;
         } else {
-          const active = m === "cluster-mesh" && (Math.sin(t * 1.4 + i * 0.7) > 0.93);
-          ctx.fillStyle = active ? "rgba(224,109,59,1)" : "rgba(245,245,247,0.85)";
-          const s = active ? 5 : 3;
-          ctx.fillRect(n.x - s / 2, n.y - s / 2, s, s);
-          if (active) {
-            ctx.strokeStyle = "rgba(224,109,59,0.5)";
-            ctx.strokeRect(n.x - 9, n.y - 9, 18, 18);
-          }
+          alpha = 0.12 + vibrate * 0.08;
+          dash = []; width = 1;
         }
+        ctx.setLineDash(dash);
+        ctx.lineWidth = width;
+        ctx.strokeStyle = `rgba(245,245,247,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(A.x, A.y);
+        ctx.lineTo(B.x, B.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
       });
+
+      // Atoms / nodes
+      nodes.forEach((n) => {
+        const vibAmp = 1.8;
+        const vx = Math.sin(t * 2.1 + n.phase) * vibAmp;
+        const vy = Math.cos(t * 1.8 + n.phase * 1.3) * vibAmp;
+        const ax = n.x + vx, ay = n.y + vy;
+
+        // Thermal ellipsoid glow
+        const ellipsoidR = n.type === "heavy" ? 9 : n.type === "mid" ? 6 : 4;
+        const glow = ctx.createRadialGradient(ax, ay, 0, ax, ay, ellipsoidR);
+        const glowAlpha = n.type === "heavy" ? 0.15 : 0.08;
+        glow.addColorStop(0, `rgba(200, 96, 58, ${glowAlpha})`);
+        glow.addColorStop(1, "rgba(200, 96, 58, 0)");
+        ctx.beginPath();
+        ctx.arc(ax, ay, ellipsoidR, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        // Atom centre
+        const atomR = n.type === "heavy" ? 3 : n.type === "mid" ? 2 : 1.5;
+        const atomAlpha = n.type === "heavy" ? 0.9 : n.type === "mid" ? 0.7 : 0.55;
+        ctx.beginPath();
+        ctx.arc(ax, ay, atomR, 0, Math.PI * 2);
+        ctx.fillStyle = n.type === "heavy"
+          ? `rgba(200, 96, 58, ${atomAlpha})`
+          : `rgba(245, 245, 247, ${atomAlpha})`;
+        ctx.fill();
+      });
+
       raf = requestAnimationFrame(draw);
     };
 
@@ -116,5 +133,12 @@ export const NodeField = ({ mode = "cluster-mesh" }) => {
     return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
   }, []);
 
-  return <canvas ref={ref} data-testid="technology-node-field" className="absolute inset-0 h-full w-full" aria-hidden="true" />;
+  return (
+    <canvas
+      ref={ref}
+      data-testid="crystal-lattice-field"
+      className="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+    />
+  );
 };

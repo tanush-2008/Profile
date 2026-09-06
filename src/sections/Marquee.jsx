@@ -1,17 +1,21 @@
-const ITEMS = ["Autonomous computing", "Scientific precision at scale", "Deployed across aerospace & materials labs", "Zürich — Pasadena", "Intelligence at the edge of possibility"];
-
-const Run = () => (
-  <div className="flex shrink-0 items-center gap-12 pr-12">
-    {ITEMS.map((t) => (
-      <span key={t} className="flex items-center gap-12 font-display text-xs uppercase tracking-[0.32em] text-bone/70 sm:text-sm">
-        {t}<span className="h-1.5 w-1.5 bg-copper" aria-hidden />
-      </span>
-    ))}
-  </div>
-);
+import { MARQUEE_ITEMS } from "@/lib/data";
 
 export const Marquee = () => (
-  <div data-testid="marquee-ticker" className="overflow-hidden border-y border-white/10 bg-ink py-6" aria-hidden="true">
-    <div className="marquee-track"><Run /><Run /></div>
+  <div
+    data-testid="marquee-section"
+    className="border-t border-b border-white/08 bg-ink py-5 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div className="marquee-track">
+      {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+        <span
+          key={i}
+          className="mx-8 font-display text-sm uppercase tracking-[0.18em] text-bone/25 whitespace-nowrap"
+        >
+          {item}
+          <span className="ml-8 inline-block h-px w-4 bg-copper/40 translate-y-[-2px]" />
+        </span>
+      ))}
+    </div>
   </div>
 );

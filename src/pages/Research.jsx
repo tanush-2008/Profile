@@ -1,84 +1,151 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Reveal, SplitLines, EASE } from "@/components/motion";
-import { PUBLICATIONS } from "@/lib/data";
+import { Reveal, SplitLines, Rule, EASE } from "@/components/motion";
+import { DOMAINS } from "@/lib/data";
+import { NodeField } from "@/components/NodeField";
 import { cn } from "@/lib/utils";
 
-const slug = (s) => String(s).toLowerCase().replace(/\s+/g, "-");
-const YEARS = [...new Set(PUBLICATIONS.map((p) => p.year))].sort((a, b) => b - a);
-const DOMAINS = [...new Set(PUBLICATIONS.map((p) => p.domain))].sort();
+const DomainAccordion = ({ d, i, open, onToggle }) => (
+  <Reveal delay={i * 0.04} data-testid={`research-domain-${d.id}`} className="border-b border-white/08">
+    <button
+      onClick={() => onToggle(d.id)}
+      aria-expanded={open}
+      data-testid={`domain-toggle-${d.id}`}
+      className="group w-full grid grid-cols-12 gap-x-4 gap-y-4 py-10 text-left lg:py-12"
+    >
+      <span className="col-span-12 flex items-center gap-4 font-mono text-[10px] tracking-[0.2em] text-dust lg:col-span-1">
+        <span>{d.index}</span>
+        <span className="h-px w-8 bg-white/15" />
+      </span>
+      <h3 className={cn(
+        "col-span-12 font-display font-bold uppercase leading-[0.88] tracking-[-0.04em] transition-colors duration-600",
+        "text-[clamp(2.2rem,6.5vw,7.6rem)]",
+        open ? "text-copper" : "text-bone group-hover:text-bone/75",
+        "lg:col-span-8"
+      )}>
+        {d.title}
+      </h3>
+      <div className="col-span-12 flex items-center justify-between lg:col-span-3 lg:flex-col lg:items-end lg:justify-center gap-4">
+        <span className="label-tag">{d.tag}</span>
+        <span className={cn(
+          "relative block h-4 w-4 transition-transform duration-500 flex-shrink-0",
+          open && "rotate-45"
+        )}>
+          <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-bone" />
+          <span className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-bone" />
+        </span>
+      </div>
+    </button>
 
-const FilterGroup = ({ label, options, value, onChange, prefix }) => (
-  <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
-    <span className="eyebrow w-16 text-graphite">{label}</span>
-    {["All", ...options].map((o) => {
-      const on = value === o;
-      return (
-        <button key={o} data-testid={`research-filter-${prefix}-${slug(o)}`} onClick={() => onChange(o)} aria-pressed={on}
-          className={cn("relative font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-300", on ? "text-copper" : "text-graphite hover:text-onyx")}>
-          {o}
-          <span className={cn("absolute -bottom-1 left-0 h-px w-full bg-copper origin-left transition-transform duration-500", on ? "scale-x-100" : "scale-x-0")} />
-        </button>
-      );
-    })}
-  </div>
-);
-
-const Row = ({ p, i }) => (
-  <motion.li layout initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.5, ease: EASE, delay: i * 0.03 }}
-    data-testid={`research-row-${p.id}`} className="group grid grid-cols-12 gap-x-4 gap-y-3 border-b border-black/10 py-7 lg:py-9">
-    <span className="col-span-3 font-mono text-[11px] text-graphite lg:col-span-1">{p.year}</span>
-    <span className="col-span-9 font-mono text-[10px] uppercase tracking-[0.2em] text-graphite lg:col-span-2">{p.type} / {p.ref}</span>
-    <h2 className="col-span-12 font-display text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 group-hover:text-copper sm:text-xl lg:col-span-6 lg:text-2xl">{p.title}</h2>
-    <span className="col-span-8 text-sm text-graphite lg:col-span-2">{p.authors}</span>
-    <span className="col-span-4 text-right font-mono text-[10px] uppercase tracking-[0.15em] text-onyx lg:col-span-1">{p.domain}</span>
-  </motion.li>
+    <AnimatePresence initial={false}>
+      {open && (
+        <motion.div
+          data-testid={`domain-drawer-${d.id}`}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="overflow-hidden"
+        >
+          <div className="grid grid-cols-12 gap-x-4 gap-y-10 border-t border-white/08 py-10">
+            {/* Body text */}
+            <div className="col-span-12 lg:col-span-6">
+              <p className="text-sm leading-relaxed text-dust sm:text-base max-w-prose">{d.body}</p>
+            </div>
+            {/* Key areas */}
+            <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+              <div className="eyebrow text-dust mb-5">Key Areas</div>
+              <ul className="space-y-3">
+                {d.keyAreas.map((a) => (
+                  <li key={a} className="flex items-baseline gap-3 text-sm text-bone/80">
+                    <span className="h-px w-4 bg-copper/60 flex-shrink-0 translate-y-[-2px]" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </Reveal>
 );
 
 export default function Research() {
-  const [year, setYear] = useState("All");
-  const [domain, setDomain] = useState("All");
-  const results = useMemo(
-    () => PUBLICATIONS.filter((p) => (year === "All" || p.year === year) && (domain === "All" || p.domain === domain)),
-    [year, domain]
-  );
+  const [openId, setOpenId] = useState("polymorphism");
+  const toggle = (id) => setOpenId((v) => (v === id ? null : id));
 
   return (
     <main data-testid="page-research">
-      <section className="min-h-[60svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
-        <div className="grid grid-cols-12 gap-x-4 gap-y-12">
-          <div className="col-span-12 eyebrow text-dust lg:col-span-2">08 — Research</div>
-          <div className="col-span-12 lg:col-span-10 lg:col-start-3">
-            <SplitLines as="h1" lines={["Publications", "& Preprints."]} delay={0.3} data-testid="page-research-title"
-              className="font-display text-[clamp(2.6rem,8vw,9rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em]" />
+      {/* Header */}
+      <section className="relative min-h-[70svh] overflow-hidden bg-ink px-6 pb-0 pt-36 text-bone lg:px-12 lg:pt-48">
+        {/* Crystal lattice panel */}
+        <div className="absolute right-0 top-0 h-full w-[45%] hidden lg:block opacity-40">
+          <div className="corner-marks relative h-full border-l border-white/06">
+            <span className="cm" />
+            <NodeField mode="polymorphism" />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-5 eyebrow text-dust">
+              <div className="flex justify-between">
+                <span>Crystal lattice / monoclinic P</span>
+                <span>Active</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-bone">Unit cell visualisation</span>
+                <span>300+ structures</span>
+              </div>
+            </div>
           </div>
-          <Reveal delay={0.5} className="col-span-12 lg:col-span-5 lg:col-start-7">
-            <p className="text-base leading-relaxed text-dust sm:text-lg">We publish what we learn. Research from AURELIS laboratories and partner institutions, in the order it was released.</p>
+        </div>
+
+        <div className="relative z-10 grid grid-cols-12 gap-x-4 gap-y-12">
+          <div className="col-span-12 eyebrow text-dust lg:col-span-2">Research Domains</div>
+          <div className="col-span-12 lg:col-span-8 lg:col-start-3">
+            <SplitLines
+              as="h1"
+              lines={["The solid-state", "sciences."]}
+              delay={0.3}
+              data-testid="page-research-title"
+              className="font-display text-[clamp(3rem,9vw,10.5rem)] font-bold uppercase leading-[0.86] tracking-[-0.04em]"
+            />
+          </div>
+          <Reveal delay={0.5} className="col-span-12 lg:col-span-5 lg:col-start-3">
+            <p className="text-base leading-relaxed text-dust sm:text-lg max-w-prose">
+              Pharmaceutical solid-state science spans eight interconnected disciplines — from molecular crystal engineering to industrial particle engineering. Each demands expert command; together they determine whether a drug can be manufactured, stabilised and delivered.
+            </p>
           </Reveal>
         </div>
+
+        {/* Stats bar */}
+        <Reveal delay={0.6}>
+          <div className="relative z-10 mt-16 grid grid-cols-4 gap-4 border-t border-white/08 pt-6 sm:grid-cols-4 eyebrow text-dust">
+            {[
+              ["300+", "Crystal structures solved"],
+              ["200+", "Solid forms assessed"],
+              ["200+", "Stability evaluations"],
+              ["40+", "Client programmes"],
+            ].map(([v, l]) => (
+              <div key={l} className="col-span-2 sm:col-span-1">
+                <div className="font-display text-xl font-bold text-bone sm:text-2xl">{v}</div>
+                <div className="mt-1">{l}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
-      <section className="bg-bone px-6 py-20 text-onyx lg:px-12 lg:py-32">
-        <Reveal className="space-y-5 border-b border-black/15 pb-10">
-          <FilterGroup label="Year" prefix="year" options={YEARS} value={year} onChange={setYear} />
-          <FilterGroup label="Domain" prefix="domain" options={DOMAINS} value={domain} onChange={setDomain} />
-        </Reveal>
-
-        <div className="mt-8 flex items-baseline justify-between eyebrow text-graphite">
-          <span data-testid="research-results-count">{results.length} {results.length === 1 ? "entry" : "entries"}</span>
-          {(year !== "All" || domain !== "All") && (
-            <button data-testid="research-filter-reset" onClick={() => { setYear("All"); setDomain("All"); }} className="link-underline text-copper">Reset filters</button>
-          )}
-        </div>
-
-        <motion.ul layout className="mt-6 border-t border-black/15">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {results.map((p, i) => <Row key={p.id} p={p} i={i} />)}
-          </AnimatePresence>
-        </motion.ul>
-        {results.length === 0 && (
-          <div data-testid="research-empty" className="py-20 font-display text-2xl uppercase tracking-tight text-graphite">No publications match.</div>
-        )}
+      {/* Domain accordions */}
+      <section className="bg-ink px-6 py-16 text-bone lg:px-12 lg:py-24">
+        <Rule className="mb-0" />
+        {DOMAINS.map((d, i) => (
+          <DomainAccordion
+            key={d.id}
+            d={d}
+            i={i}
+            open={openId === d.id}
+            onToggle={toggle}
+          />
+        ))}
       </section>
     </main>
   );

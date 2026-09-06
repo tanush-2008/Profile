@@ -1,66 +1,94 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Reveal, SplitLines } from "@/components/motion";
-import { IMG } from "@/lib/data";
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal, SplitLines, EASE } from "@/components/motion";
+import { CASE_STUDIES } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
-const META = [
-  ["Client", "Undisclosed aerospace consortium"],
-  ["Domain", "Ni-superalloy microstructure"],
-  ["Substrate", "AURELIS A-Series, 128 nodes"],
-  ["Duration", "6 days (est. 18 weeks conventional)"],
-];
-
-const Stat = ({ v, l, testid }) => (
-  <div data-testid={testid}>
-    <div className="font-display text-5xl font-bold leading-none tracking-[-0.04em] sm:text-6xl">{v}</div>
-    <div className="mt-3 eyebrow text-dust">{l}</div>
-  </div>
-);
-
-export const CaseStudy = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+export const SelectedWork = () => {
+  const [active, setActive] = useState(0);
+  const cs = CASE_STUDIES[active];
 
   return (
-    <section id="helios" data-testid="case-study-helios" className="bg-ink text-bone">
-      <div ref={ref} className="relative h-[72vh] overflow-hidden lg:h-screen">
-        <motion.img src={IMG.helios} alt="Crystalline alloy lattice — Project Helios" style={{ y }}
-          className="absolute inset-0 h-[124%] w-full -translate-y-[12%] object-cover" />
-        <div className="absolute inset-0 bg-ink/35" />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent" />
+    <section
+      data-testid="selected-work-section"
+      className="bg-bone text-onyx"
+    >
+      {/* Section header */}
+      <div className="border-t border-black/08 px-6 py-20 lg:px-12 lg:py-28">
+        <div className="grid grid-cols-12 gap-x-4 gap-y-12">
+          <div className="col-span-12 lg:col-span-4">
+            <div className="eyebrow text-graphite mb-8">Selected Drug Programs</div>
+            <SplitLines
+              as="h2"
+              lines={["Science", "applied to", "real drugs."]}
+              className="font-display text-[clamp(2rem,5vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.035em]"
+            />
+            <Reveal delay={0.3}>
+              <p className="mt-8 text-sm leading-relaxed text-graphite sm:text-base max-w-xs">
+                Solid-form science applied to documented pharmaceutical development programmes — from molecular analysis to IP protection.
+              </p>
+              <Link to="/innovation#case-studies" className="btn-primary on-light mt-8 inline-flex">
+                Full case studies →
+              </Link>
+            </Reveal>
+          </div>
 
-        <div className="absolute inset-x-0 top-0 flex justify-between px-6 pt-24 eyebrow text-bone/80 lg:px-12 lg:pt-32">
-          <span>06 — Case study</span><span>Project Helios / 2026</span>
+          {/* Drug selector */}
+          <div className="col-span-12 lg:col-span-8 lg:pl-12">
+            <div className="border-t border-black/08">
+              {CASE_STUDIES.map((cs, i) => (
+                <button
+                  key={cs.id}
+                  data-testid={`drug-item-${cs.id}`}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                  className={cn(
+                    "group w-full grid grid-cols-12 items-baseline gap-x-4 border-b border-black/08 py-6 text-left transition-colors duration-300",
+                    active === i ? "bg-black/[0.025]" : ""
+                  )}
+                >
+                  <span className="col-span-1 font-mono text-[10px] text-graphite">
+                    0{i + 1}
+                  </span>
+                  <span className={cn(
+                    "col-span-7 font-display text-[clamp(1.4rem,3.2vw,3rem)] uppercase tracking-tight leading-none transition-colors duration-400",
+                    active === i ? "text-onyx" : "text-onyx/40"
+                  )}>
+                    {cs.drug}
+                  </span>
+                  <span className={cn(
+                    "col-span-4 text-right font-mono text-[9px] uppercase tracking-[0.15em] transition-colors duration-400",
+                    active === i ? "text-copper" : "text-graphite/50"
+                  )}>
+                    {cs.tag}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Detail */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="mt-8 grid grid-cols-12 gap-x-4 gap-y-4"
+              >
+                <div className="col-span-12 sm:col-span-4">
+                  <div className="eyebrow text-graphite mb-2">Indication</div>
+                  <p className="text-sm text-onyx/80">{cs.indication}</p>
+                </div>
+                <div className="col-span-12 sm:col-span-8">
+                  <div className="eyebrow text-graphite mb-2">Solid-Form Context</div>
+                  <p className="text-sm leading-relaxed text-graphite">{cs.context}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-        <div className="absolute bottom-8 left-6 right-6 lg:bottom-14 lg:left-12">
-          <SplitLines as="h2" lines={["Project", "Helios"]} stagger={0.15}
-            className="font-display text-[clamp(3.6rem,12vw,14rem)] font-bold uppercase leading-[0.82] tracking-[-0.05em]" />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-12 gap-x-4 gap-y-14 border-t border-white/10 px-6 py-20 lg:px-12 lg:py-28">
-        <Reveal className="col-span-12 lg:col-span-5">
-          <h3 className="font-display text-2xl font-medium leading-tight sm:text-3xl lg:text-4xl">“Mapping the behavior of next-generation materials.”</h3>
-          <p className="mt-8 max-w-md text-sm leading-relaxed text-dust sm:text-base">
-            Helios resolved the grain-boundary dynamics of a nickel superalloy that had never been manufactured — 1.2 billion particles, coupled to a thermal model, running as a single continuously rebalanced workload. The alloy went to casting three weeks later.
-          </p>
-          <Link to="/research" data-testid="helios-paper-btn" className="btn-ghost mt-10">Read the technical brief <span aria-hidden>→</span></Link>
-        </Reveal>
-
-        <Reveal delay={0.15} className="col-span-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
-          <Stat testid="helios-metric-particles" v={<>1.2<span className="text-copper">B</span></>} l="Particles simulated" />
-          <Stat testid="helios-metric-latency" v={<>0.4<span className="text-copper">ms</span></>} l="p99 step latency" />
-          <Stat testid="helios-metric-time" v={<>21<span className="text-copper">×</span></>} l="Faster than conventional" />
-          <dl className="col-span-2 mt-4 grid grid-cols-1 gap-y-4 border-t border-white/10 pt-6 sm:col-span-3 sm:grid-cols-2 sm:gap-x-8">
-            {META.map(([k, v]) => (
-              <div key={k} className="flex justify-between gap-6 border-b border-white/10 pb-3 text-xs">
-                <dt className="eyebrow text-dust">{k}</dt><dd className="text-right font-mono text-bone/90">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
       </div>
     </section>
   );
