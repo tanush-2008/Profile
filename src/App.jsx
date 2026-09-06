@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "@/App.css";
 import "lenis/dist/lenis.css";
 import Lenis from "lenis";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "@/components/ui/sonner";
@@ -9,13 +10,15 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Cursor } from "@/components/Cursor";
 import { EASE } from "@/components/motion";
-import Home from "@/pages/Home";
-import Research from "@/pages/Research";
-import Innovation from "@/pages/Innovation";
-import Publications from "@/pages/Publications";
-import Patents from "@/pages/Patents";
-import Career from "@/pages/Career";
-import Contact from "@/pages/Inbox";
+
+// Lazy load pages for code splitting
+const Home = lazy(() => import("@/pages/Home"));
+const Research = lazy(() => import("@/pages/Research"));
+const Innovation = lazy(() => import("@/pages/Innovation"));
+const Publications = lazy(() => import("@/pages/Publications"));
+const Patents = lazy(() => import("@/pages/Patents"));
+const Career = lazy(() => import("@/pages/Career"));
+const Contact = lazy(() => import("@/pages/Inbox"));
 
 const LABELS = {
   "/":             "Home",
@@ -75,6 +78,20 @@ const PageShell = ({ children }) => (
   </div>
 );
 
+// Minimal loading indicator during code-split chunk fetch
+const PageLoader = () => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink">
+    <div className="flex flex-col items-center gap-4">
+      <span className="relative flex h-5 w-5 items-center justify-center border border-copper/50">
+        <span className="h-1 w-1 bg-copper pulse-dot" />
+      </span>
+      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-dust">
+        Loading Component
+      </span>
+    </div>
+  </div>
+);
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   const [displayed, setDisplayed] = useState(location);
@@ -93,15 +110,17 @@ const AnimatedRoutes = () => {
 
   return (
     <>
-      <Routes location={displayed}>
-        <Route path="/"             element={<PageShell><Home /></PageShell>} />
-        <Route path="/research"     element={<PageShell><Research /></PageShell>} />
-        <Route path="/innovation"   element={<PageShell><Innovation /></PageShell>} />
-        <Route path="/publications" element={<PageShell><Publications /></PageShell>} />
-        <Route path="/patents"      element={<PageShell><Patents /></PageShell>} />
-        <Route path="/career"       element={<PageShell><Career /></PageShell>} />
-        <Route path="/contact"      element={<PageShell><Contact /></PageShell>} />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes location={displayed}>
+          <Route path="/"             element={<PageShell><Home /></PageShell>} />
+          <Route path="/research"     element={<PageShell><Research /></PageShell>} />
+          <Route path="/innovation"   element={<PageShell><Innovation /></PageShell>} />
+          <Route path="/publications" element={<PageShell><Publications /></PageShell>} />
+          <Route path="/patents"      element={<PageShell><Patents /></PageShell>} />
+          <Route path="/career"       element={<PageShell><Career /></PageShell>} />
+          <Route path="/contact"      element={<PageShell><Contact /></PageShell>} />
+        </Routes>
+      </Suspense>
       <Curtain covering={covering} label={LABELS[location.pathname] || "Home"} />
     </>
   );

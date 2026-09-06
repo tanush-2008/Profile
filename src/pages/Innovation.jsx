@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal, SplitLines, EASE } from "@/components/motion";
 import { PIPELINE, CASE_STUDIES } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 // Animated pipeline diagram — differentiated from homepage version
 const PipelineDiagram = () => {
@@ -100,6 +101,10 @@ const CaseStudyRow = ({ cs, i }) => (
 export default function Innovation() {
   return (
     <main data-testid="page-innovation">
+      <SEO 
+        title="Drug Development & Innovation" 
+        description="Seven interconnected disciplines transform an active molecule into a stable, manufacturable pharmaceutical product. Applied to real drug programmes." 
+      />
       {/* Header */}
       <section className="min-h-[60svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">

@@ -82,8 +82,15 @@ export const Footer = () => {
         </div>
       </div>
 
+      {/* Watermark */}
+      <div className="mt-16 select-none overflow-hidden lg:mt-24" aria-hidden>
+        <div className="font-display text-[clamp(4.5rem,17vw,21rem)] font-bold leading-[0.78] tracking-[-0.04em] text-bone/[0.035] translate-y-[0.1em]">
+          PEDDY
+        </div>
+      </div>
+
       {/* Bottom bar — condensed */}
-      <div className="mt-16 flex flex-wrap items-center justify-between gap-y-3 border-t border-white/08 py-5 eyebrow text-dust lg:mt-20">
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-y-3 border-t border-white/08 py-5 eyebrow text-dust mt-6">
         <span>© 2026 Dr. Vishweshwar Peddy</span>
         <span className="text-dust/50">40 Publications · &gt;6,700 Citations · H-index 24 · 79 Patent Filings</span>
       </div>

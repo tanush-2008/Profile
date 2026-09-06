@@ -34,33 +34,48 @@ export const SelectedWork = () => {
 
           {/* Drug selector */}
           <div className="col-span-12 lg:col-span-7 lg:pl-8">
-            <div className="border-t border-black/08">
+            <div className="relative border-t border-black/10">
+              {/* Architectural Crosshair */}
+              <div className="absolute -top-[5px] left-6 h-2.5 w-2.5 pointer-events-none z-20">
+                <div className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 bg-black/40" />
+                <div className="absolute top-1/2 left-0 h-[1px] w-full -translate-y-1/2 bg-black/40" />
+              </div>
+
               {CASE_STUDIES.map((c, i) => (
                 <button
                   key={c.id}
                   data-testid={`drug-item-${c.id}`}
                   onClick={() => setActive(i)}
                   onMouseEnter={() => setActive(i)}
-                  className={cn(
-                    "group w-full flex items-baseline gap-x-6 border-b border-black/08 py-6 text-left transition-colors duration-300",
-                    active === i ? "bg-black/[0.025]" : ""
-                  )}
+                  className="group relative w-full flex flex-col justify-center overflow-hidden border-b border-black/10 py-8 lg:py-10 text-left transition-colors duration-300 hover:bg-black/[0.015]"
                 >
-                  <span className="font-mono text-[10px] text-graphite/50 w-6 flex-shrink-0">
-                    0{i + 1}
-                  </span>
-                  <span className={cn(
-                    "flex-1 font-display text-[clamp(1.4rem,3.2vw,3rem)] uppercase tracking-tight leading-none transition-colors duration-400",
-                    active === i ? "text-onyx" : "text-onyx/30"
-                  )}>
-                    {c.drug}
-                  </span>
-                  <span className={cn(
-                    "font-mono text-[9px] uppercase tracking-[0.15em] transition-colors duration-400 flex-shrink-0",
-                    active === i ? "text-copper" : "text-graphite/40"
-                  )}>
-                    {c.tag}
-                  </span>
+                  {/* Massive background watermark letter per row */}
+                  <div className="pointer-events-none absolute -left-4 top-1/2 -translate-y-1/2 font-display text-[clamp(10rem,20vw,24rem)] font-bold leading-none text-black/[0.025] select-none">
+                    {["C", "A", "S", "E", "S"][i]}
+                  </div>
+
+                  <div className="relative z-10 flex items-center justify-between w-full pl-6">
+                    <div className="flex items-center gap-8 md:gap-16">
+                      {/* Precisely aligned small index number */}
+                      <span className="font-mono text-[11px] text-graphite/40 w-6 flex-shrink-0 mt-1">
+                        0{i + 1}
+                      </span>
+                      {/* Massive typographic title */}
+                      <span className={cn(
+                        "font-display text-[clamp(2.5rem,6vw,6rem)] uppercase tracking-[-0.03em] leading-[0.85] transition-colors duration-400",
+                        active === i ? "text-onyx" : "text-onyx/20 group-hover:text-onyx/40"
+                      )}>
+                        {c.drug}
+                      </span>
+                    </div>
+                    {/* Tag */}
+                    <span className={cn(
+                      "hidden sm:block font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-400 text-right pr-4",
+                      active === i ? "text-copper" : "text-graphite/30"
+                    )}>
+                      {c.tag}
+                    </span>
+                  </div>
                 </button>
               ))}
             </div>

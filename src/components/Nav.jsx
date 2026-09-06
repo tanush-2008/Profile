@@ -138,6 +138,8 @@ export const Nav = () => {
             <button
               data-testid="nav-menu-toggle"
               aria-label="Toggle menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               onClick={() => setOpen((v) => !v)}
               className="group flex h-10 w-10 flex-col items-end justify-center gap-1.5 lg:hidden"
             >

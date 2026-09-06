@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal, SplitLines, EASE } from "@/components/motion";
 import { PUBLICATIONS, PUB_TOPICS, PUB_YEARS, PUB_TYPES } from "@/lib/publications";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 const slug = (s) => String(s).toLowerCase().replace(/\s+/g, "-");
 
@@ -149,6 +150,10 @@ export default function Publications() {
 
   return (
     <main data-testid="page-publications">
+      <SEO 
+        title="Peer-Reviewed Publications" 
+        description="40 peer-reviewed publications spanning polymorphism, crystal engineering, pharmaceutical cocrystals, amorphous systems and solid-state characterisation." 
+      />
       {/* Header */}
       <section className="min-h-[50svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">

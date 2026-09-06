@@ -8,5 +8,15 @@ export default defineConfig({
     alias: {
       "@": path.resolve(process.cwd(), "src")
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom", "react-helmet-async"],
+          framer: ["framer-motion"],
+        },
+      },
+    },
+  },
 });

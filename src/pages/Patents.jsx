@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal, SplitLines, EASE } from "@/components/motion";
 import { PATENTS, PAT_STATUSES, PAT_TOPICS } from "@/lib/patents";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 const slug = (s) => String(s).toLowerCase().replace(/[\s/]+/g, "-");
 
@@ -154,6 +155,10 @@ export default function Patents() {
 
   return (
     <main data-testid="page-patents">
+      <SEO 
+        title="Patents & Intellectual Property" 
+        description="79 patent filings spanning polymorphic forms, cocrystals, salts, amorphous dispersions and particle engineering processes." 
+      />
       {/* Header */}
       <section className="min-h-[50svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">

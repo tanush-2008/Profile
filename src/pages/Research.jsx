@@ -4,12 +4,14 @@ import { Reveal, SplitLines, Rule, EASE } from "@/components/motion";
 import { DOMAINS } from "@/lib/data";
 import { NodeField } from "@/components/NodeField";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 const DomainAccordion = ({ d, i, open, onToggle }) => (
   <Reveal delay={i * 0.04} data-testid={`research-domain-${d.id}`} className="border-b border-white/08">
     <button
       onClick={() => onToggle(d.id)}
       aria-expanded={open}
+      aria-controls={`domain-content-${d.id}`}
       data-testid={`domain-toggle-${d.id}`}
       className="group w-full grid grid-cols-12 gap-x-4 gap-y-4 py-10 text-left lg:py-12"
     >
@@ -40,6 +42,7 @@ const DomainAccordion = ({ d, i, open, onToggle }) => (
     <AnimatePresence initial={false}>
       {open && (
         <motion.div
+          id={`domain-content-${d.id}`}
           data-testid={`domain-drawer-${d.id}`}
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
@@ -80,6 +83,10 @@ export default function Research() {
 
   return (
     <main data-testid="page-research">
+      <SEO 
+        title="Solid-State Research" 
+        description="Pharmaceutical solid-state science spanning eight interconnected disciplines — from molecular crystal engineering to industrial particle engineering." 
+      />
       {/* Header — asymmetric with watermark */}
       <section className="relative min-h-[70svh] overflow-hidden bg-ink px-6 pb-0 pt-36 text-bone lg:px-12 lg:pt-48">
         {/* Large watermark numeral */}

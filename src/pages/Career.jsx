@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal, SplitLines, EASE } from "@/components/motion";
 import { CAREER } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 const typeColors = {
   education: "text-dust border-dust/30",
@@ -106,6 +107,10 @@ export default function Career() {
 
   return (
     <main data-testid="page-career">
+      <SEO 
+        title="Scientific Trajectory" 
+        description="Two decades of pharmaceutical R&D leadership, from doctoral research to Senior Director of Particle Science & Engineering." 
+      />
       {/* Header — era progression preview */}
       <section className="min-h-[55svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">

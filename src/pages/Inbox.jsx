@@ -1,4 +1,5 @@
 import { Reveal, SplitLines } from "@/components/motion";
+import { SEO } from "@/components/SEO";
 
 const ContactItem = ({ label, value, href, arrow, testid }) => (
   <Reveal>
@@ -25,6 +26,10 @@ const ContactItem = ({ label, value, href, arrow, testid }) => (
 export default function Contact() {
   return (
     <main data-testid="page-contact">
+      <SEO 
+        title="Contact & Collaboration" 
+        description="Collaborate on solid-form science, pharmaceutical consulting, and IP evaluation." 
+      />
       {/* Header */}
       <section className="min-h-[55svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">
