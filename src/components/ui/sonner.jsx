@@ -25,4 +25,4 @@ const Toaster = ({
   );
 }
 
-export { Toaster, toast }
+export { Toaster }

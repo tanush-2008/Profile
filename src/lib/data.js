@@ -246,13 +246,6 @@ export const CAREER = [
   },
 ];
 
-// ─── Manifesto Lines (scroll-driven) ─────────────────────────────────────────
-
-export const STATEMENT_LINES = [
-  "Molecular structure determines",
-  "everything in medicine.",
-  "We engineer it precisely.",
-];
 
 // ─── Marquee Keywords ─────────────────────────────────────────────────────────
 

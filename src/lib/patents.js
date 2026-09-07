@@ -805,4 +805,4 @@ export const PATENTS = [
 
 export const PAT_STATUSES = ["Granted", "PCT/US", "Indian"];
 export const PAT_TOPICS   = [...new Set(PATENTS.map((p) => p.topic))].sort();
-export const PAT_YEARS    = [...new Set(PATENTS.map((p) => p.year))].sort((a, b) => b - a);
+
