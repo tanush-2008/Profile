@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    # Group all non-breaking updates into a single PR to reduce noise
+    groups:
+      dev-tools:
+        patterns: ["eslint*", "prettier*", "vite*", "terser*", "@vitejs/*", "rollup*"]
+      react-ecosystem:
+        patterns: ["react*", "framer-motion*", "@eslint/*"]
+    # Cap open PRs so the repo doesn't get flooded
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    ignore:
+      # Ignore major version bumps — review those manually
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

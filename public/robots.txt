@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block raw asset chunks — they're meaningless to crawlers
+Disallow: /assets/
+
+Sitemap: https://drpeddy.vercel.app/sitemap.xml

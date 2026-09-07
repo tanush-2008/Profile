@@ -1,9 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { visualizer } from "rollup-plugin-visualizer";
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    // `npm run analyze` opens an interactive bundle treemap in the browser
+    mode === "analyze" &&
+      visualizer({ open: true, filename: "dist/stats.html", gzipSize: true, brotliSize: true }),
+  ].filter(Boolean),
   server: {
     host: true,
     port: 3000,
@@ -44,4 +50,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

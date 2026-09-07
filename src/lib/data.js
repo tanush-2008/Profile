@@ -3,20 +3,20 @@
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
 export const NAV = [
-  { id: "research",     label: "Research",     path: "/research" },
-  { id: "innovation",   label: "Innovation",   path: "/innovation" },
+  { id: "research", label: "Research", path: "/research" },
+  { id: "innovation", label: "Innovation", path: "/innovation" },
   { id: "publications", label: "Publications", path: "/publications" },
-  { id: "patents",      label: "Patents",      path: "/patents" },
-  { id: "career",       label: "Career",       path: "/career" },
-  { id: "recognition",  label: "Recognition",  path: "/recognition" },
-  { id: "contact",      label: "Contact",      path: "/contact" },
+  { id: "patents", label: "Patents", path: "/patents" },
+  { id: "career", label: "Career", path: "/career" },
+  { id: "recognition", label: "Recognition", path: "/recognition" },
+  { id: "contact", label: "Contact", path: "/contact" },
 ];
 
 // ─── Contact ─────────────────────────────────────────────────────────────────
 
 export const CONTACT = {
   emailPrimary: "peddyvishweshwar@gmail.com",
-  emailWork: "vishweshwar.peddy@sailifesciences.com",
+  emailWork: "vishweshwar.p@sailife.com",
   phone: "+91 91770 03929",
   phoneHref: "tel:+919177003929",
   linkedin: "https://www.linkedin.com/in/dr-vishweshwar-peddy-358b718/",
@@ -28,10 +28,10 @@ export const CONTACT = {
 // ─── Impact Metrics (VP.pdf p.7 · VP_Annexure.pdf p.2) ───────────────────────
 
 export const METRICS = [
-  { id: "publications", value: 40,   suffix: "",  label: "Peer-Reviewed Publications", note: "38 original research articles, 1 book chapter and 1 comprehensive review." },
-  { id: "citations",    value: 6700, suffix: "+", label: "Citations", note: "Google Scholar, May 2026. 18 publications with more than 50 citations each." },
-  { id: "hindex",       value: 24,   suffix: "",  label: "H-Index", note: "i10-index 37. Sustained impact across two decades of solid-state research." },
-  { id: "patents",      value: 79,   suffix: "",  label: "Patent Filings", note: "14 granted (12 US · 1 Australia · 1 India), 30 PCT/US and 36 Indian applications." },
+  { id: "publications", value: 40, suffix: "", label: "Peer-Reviewed Publications", note: "38 original research articles, 1 book chapter and 1 comprehensive review." },
+  { id: "citations", value: 6700, suffix: "+", label: "Citations", note: "Google Scholar, May 2026. 18 publications with more than 50 citations each." },
+  { id: "hindex", value: 24, suffix: "", label: "H-Index", note: "i10-index 37. Sustained impact across two decades of solid-state research." },
+  { id: "patents", value: 79, suffix: "", label: "Patent Filings", note: "14 granted (12 US · 1 Australia · 1 India), 30 PCT/US and 36 Indian applications." },
 ];
 
 // ─── Scientific Domains (VP.pdf pp.1–6) ──────────────────────────────────────
@@ -114,37 +114,37 @@ export const DOMAINS = [
 // ─── Scientific Pipeline (vocabulary drawn from VP.pdf) ──────────────────────
 
 export const PIPELINE = [
-  { id: "molecular",      n: "01", title: "Molecular Structure",   sub: "NCE · API",                                   desc: "Understanding the molecule — intermolecular interactions, lattice energies, solvation effects and thermodynamic stability — using Materials Studio, COSMOtherm and the Cambridge Structural Database." },
-  { id: "solid-form",     n: "02", title: "Solid Form",            sub: "Polymorphs · Salts · Cocrystals · Amorphous", desc: "Version selection followed by systematic polymorph screening: thermodynamically stable forms for NCEs, novel or IP-free/open forms for generic APIs, characterised by orthogonal techniques." },
-  { id: "crystallisation",n: "03", title: "Crystallisation",       sub: "Process Design & Control",                    desc: "Solubility and MSZW profiling with Crystal16, and PAT-enabled development with FBRM, PVM and ReactIR, define a design space that delivers solid-phase-pure polymorph, yield and product quality." },
-  { id: "particle-eng",   n: "04", title: "Particle Engineering",  sub: "PSD · D50 / D90",                             desc: "Target particle size distribution through controlled crystallisation pathways or downstream jet and wet milling, with filtration and downstream processing designed in from the start." },
-  { id: "scale-up",       n: "05", title: "Scale-Up",              sub: "Lab → Plant",                                 desc: "Lab scale-down models, Dynochem and MixIT mixing and heat-transfer evaluation, technology transfer and scientific support of plant validation campaigns." },
-  { id: "ip-reg",         n: "06", title: "IP / Regulatory",       sub: "Patents · US-DMF · Para-IV",                  desc: "Novelty and non-infringement evaluation, patent claim drafting for solid forms and processes, US-DMF filings and the resolution of polymorphism-related DMF deficiencies." },
-  { id: "product",        n: "07", title: "Pharmaceutical Product",sub: "Commercial Supply",                           desc: "An API with a defined, reproducible solid form and particle size — enabling regulatory approval, plant validation and uninterrupted commercial supply." },
+  { id: "molecular", n: "01", title: "Molecular Structure", sub: "NCE · API", desc: "Understanding the molecule — intermolecular interactions, lattice energies, solvation effects and thermodynamic stability — using Materials Studio, COSMOtherm and the Cambridge Structural Database." },
+  { id: "solid-form", n: "02", title: "Solid Form", sub: "Polymorphs · Salts · Cocrystals · Amorphous", desc: "Version selection followed by systematic polymorph screening: thermodynamically stable forms for NCEs, novel or IP-free/open forms for generic APIs, characterised by orthogonal techniques." },
+  { id: "crystallisation", n: "03", title: "Crystallisation", sub: "Process Design & Control", desc: "Solubility and MSZW profiling with Crystal16, and PAT-enabled development with FBRM, PVM and ReactIR, define a design space that delivers solid-phase-pure polymorph, yield and product quality." },
+  { id: "particle-eng", n: "04", title: "Particle Engineering", sub: "PSD · D50 / D90", desc: "Target particle size distribution through controlled crystallisation pathways or downstream jet and wet milling, with filtration and downstream processing designed in from the start." },
+  { id: "scale-up", n: "05", title: "Scale-Up", sub: "Lab → Plant", desc: "Lab scale-down models, Dynochem and MixIT mixing and heat-transfer evaluation, technology transfer and scientific support of plant validation campaigns." },
+  { id: "ip-reg", n: "06", title: "IP / Regulatory", sub: "Patents · US-DMF · Para-IV", desc: "Novelty and non-infringement evaluation, patent claim drafting for solid forms and processes, US-DMF filings and the resolution of polymorphism-related DMF deficiencies." },
+  { id: "product", n: "07", title: "Pharmaceutical Product", sub: "Commercial Supply", desc: "An API with a defined, reproducible solid form and particle size — enabling regulatory approval, plant validation and uninterrupted commercial supply." },
 ];
 
 // ─── Filed Products (VP_Annexure.pdf pp.1–2, public-domain information) ──────
 
 export const PRODUCTS = [
-  { id: "roxadustat",         group: "dmf", drug: "Roxadustat",               form: "Novel co-crystal with L-Proline",     tag: "Cocrystal",   patents: "US 11,168,057 B2 · WO 2019/030711",                                          filing: "US-DMF #35463 filed",          note: "The first API co-crystal DMF from India." },
-  { id: "lenvatinib",         group: "dmf", drug: "Lenvatinib Mesylate",      form: "Novel crystalline form",              tag: "Polymorph",   patents: "US 11,084,791 B2 · WO 2018/122780 A1",                                       filing: "US-DMF #32905 filed",          note: "Lenvatinib mesylate·MIBK solvate — regulatory approval followed by a robust crystallisation process and US-DMF, a first-of-its-kind achievement globally." },
-  { id: "tafamidis",          group: "new", drug: "Tafamidis",                form: "Form-4",                              tag: "New Product", patents: "US 12,522,573 B2 · WO 2022/084790 A1",                                       filing: "US-DMF #37523 filed" },
-  { id: "mirabegron",         group: "dmf", drug: "Mirabegron",               form: "Novel amorphous form",                tag: "Amorphous",   patents: "US 9,283,210 B2 · IN 321858 · WO 2012/156998 A2",                            filing: "ANDA and US-DMF #29064 filed" },
-  { id: "nilotinib",          group: "dmf", drug: "Nilotinib Hydrochloride",  form: "Novel crystalline form",              tag: "Polymorph",   patents: "US 9,981,947 B2 · US 9,580,408 B2 · AU 2014259029 B2 · WO 2014/174456 A2",   filing: "US-DMF #30088 filed" },
-  { id: "vilazodone",         group: "dmf", drug: "Vilazodone Hydrochloride", form: "Novel crystalline form",              tag: "Polymorph",   patents: "US 10,011,590 B2 · WO 2013/168126 A1",                                       filing: "ANDA and US-DMF #28260 filed" },
-  { id: "mirabegron-asd",     group: "dmf", drug: "Mirabegron",               form: "Novel amorphous solid dispersion",    tag: "ASD",         patents: "US 9,283,210 B2 · IN 321858 · WO 2012/156998 A2",                            filing: "US-DMF #30413 filed" },
-  { id: "ibrutinib",          group: "dmf", drug: "Ibrutinib",                form: "Novel crystalline form",              tag: "Polymorph",   patents: "WO 2019/138326 A1 · WO 2016/139588 A1",                                      filing: "US-DMF #31792 filed" },
-  { id: "eliglustat",         group: "dmf", drug: "Eliglustat Hemi-tartrate", form: "Novel amorphous solid dispersion",    tag: "ASD",         patents: "WO 2016/001885 A2",                                                          filing: "US-DMF #31475 filed" },
-  { id: "tafamidis-meglumine",group: "new", drug: "Tafamidis Meglumine",      form: "Form-M",                              tag: "New Product", patents: "WO 2023/203503 A1",                                                          filing: "US-DMF #37026 filed" },
-  { id: "ruxolitinib",        group: "new", drug: "Ruxolitinib Phosphate",    form: "New product API development",         tag: "New Product", patents: "WO 2023/223251 A1",                                                          filing: "API development" },
-  { id: "apixaban",           group: "cip", drug: "Apixaban",                 form: "Cost-improvement programme (CIP)",    tag: "CIP",         patents: "—",                                                                          filing: "Commercialised" },
-  { id: "ranolazine",         group: "cip", drug: "Ranolazine",               form: "Cost-improvement programme (CIP)",    tag: "CIP",         patents: "—",                                                                          filing: "Commercialised" },
+  { id: "roxadustat", group: "dmf", drug: "Roxadustat", form: "Novel co-crystal with L-Proline", tag: "Cocrystal", patents: "US 11,168,057 B2 · WO 2019/030711", filing: "US-DMF #35463 filed", note: "The first API co-crystal DMF from India." },
+  { id: "lenvatinib", group: "dmf", drug: "Lenvatinib Mesylate", form: "Novel crystalline form", tag: "Polymorph", patents: "US 11,084,791 B2 · WO 2018/122780 A1", filing: "US-DMF #32905 filed", note: "Lenvatinib mesylate·MIBK solvate — regulatory approval followed by a robust crystallisation process and US-DMF, a first-of-its-kind achievement globally." },
+  { id: "tafamidis", group: "new", drug: "Tafamidis", form: "Form-4", tag: "New Product", patents: "US 12,522,573 B2 · WO 2022/084790 A1", filing: "US-DMF #37523 filed" },
+  { id: "mirabegron", group: "dmf", drug: "Mirabegron", form: "Novel amorphous form", tag: "Amorphous", patents: "US 9,283,210 B2 · IN 321858 · WO 2012/156998 A2", filing: "ANDA and US-DMF #29064 filed" },
+  { id: "nilotinib", group: "dmf", drug: "Nilotinib Hydrochloride", form: "Novel crystalline form", tag: "Polymorph", patents: "US 9,981,947 B2 · US 9,580,408 B2 · AU 2014259029 B2 · WO 2014/174456 A2", filing: "US-DMF #30088 filed" },
+  { id: "vilazodone", group: "dmf", drug: "Vilazodone Hydrochloride", form: "Novel crystalline form", tag: "Polymorph", patents: "US 10,011,590 B2 · WO 2013/168126 A1", filing: "ANDA and US-DMF #28260 filed" },
+  { id: "mirabegron-asd", group: "dmf", drug: "Mirabegron", form: "Novel amorphous solid dispersion", tag: "ASD", patents: "US 9,283,210 B2 · IN 321858 · WO 2012/156998 A2", filing: "US-DMF #30413 filed" },
+  { id: "ibrutinib", group: "dmf", drug: "Ibrutinib", form: "Novel crystalline form", tag: "Polymorph", patents: "WO 2019/138326 A1 · WO 2016/139588 A1", filing: "US-DMF #31792 filed" },
+  { id: "eliglustat", group: "dmf", drug: "Eliglustat Hemi-tartrate", form: "Novel amorphous solid dispersion", tag: "ASD", patents: "WO 2016/001885 A2", filing: "US-DMF #31475 filed" },
+  { id: "tafamidis-meglumine", group: "new", drug: "Tafamidis Meglumine", form: "Form-M", tag: "New Product", patents: "WO 2023/203503 A1", filing: "US-DMF #37026 filed" },
+  { id: "ruxolitinib", group: "new", drug: "Ruxolitinib Phosphate", form: "New product API development", tag: "New Product", patents: "WO 2023/223251 A1", filing: "API development" },
+  { id: "apixaban", group: "cip", drug: "Apixaban", form: "Cost-improvement programme (CIP)", tag: "CIP", patents: "—", filing: "Commercialised" },
+  { id: "ranolazine", group: "cip", drug: "Ranolazine", form: "Cost-improvement programme (CIP)", tag: "CIP", patents: "—", filing: "Commercialised" },
 ];
 
 export const PRODUCT_GROUPS = [
   { id: "dmf", title: "Novel solid forms — Para-IV ANDAs & US-DMFs", note: "Invention of novel solid forms led to 8 US-DMF filings." },
-  { id: "new", title: "New product development",                     note: "API development at all stages — route selection through plant validation." },
-  { id: "cip", title: "Cost-improvement programmes",                 note: "Scalable, economical routes of synthesis for commercial APIs." },
+  { id: "new", title: "New product development", note: "API development at all stages — route selection through plant validation." },
+  { id: "cip", title: "Cost-improvement programmes", note: "Scalable, economical routes of synthesis for commercial APIs." },
 ];
 
 export const HOME_PRODUCT_IDS = ["roxadustat", "lenvatinib", "tafamidis", "mirabegron", "nilotinib", "vilazodone"];
@@ -235,10 +235,10 @@ export const CAREER = [
 ];
 
 export const CAREER_ERAS = [
-  { era: "Education",    years: "1999–2004", accent: false },
+  { era: "Education", years: "1999–2004", accent: false },
   { era: "Postdoctoral", years: "2004–2006", accent: false },
-  { era: "Industry",     years: "2006–2023", accent: false },
-  { era: "Current",      years: "2023–",     accent: true },
+  { era: "Industry", years: "2006–2023", accent: false },
+  { era: "Current", years: "2023–", accent: true },
 ];
 
 // VP.pdf p.7 — People, Culture & Execution Leadership
@@ -246,7 +246,7 @@ export const LEADERSHIP = [
   { value: "~20", label: "Years of people leadership" },
   { value: "60+", label: "Scientists interviewed & hired" },
   { value: "40+", label: "Client programmes delivered" },
-  { value: "8",   label: "US-DMFs from novel solid forms" },
+  { value: "8", label: "US-DMFs from novel solid forms" },
 ];
 
 // ─── Marquee Keywords (all appear in VP.pdf) ─────────────────────────────────
@@ -266,10 +266,10 @@ export const FOOTER_COLUMNS = [
     id: "research",
     title: "Research",
     links: [
-      { label: "Polymorphism",      path: "/research#polymorphism" },
-      { label: "Cocrystals",        path: "/research#cocrystals" },
-      { label: "Crystallisation",   path: "/research#crystallisation" },
-      { label: "Particle Science",  path: "/research#particle-science" },
+      { label: "Polymorphism", path: "/research#polymorphism" },
+      { label: "Cocrystals", path: "/research#cocrystals" },
+      { label: "Crystallisation", path: "/research#crystallisation" },
+      { label: "Particle Science", path: "/research#particle-science" },
       { label: "Amorphous Systems", path: "/research#asd" },
     ],
   },
@@ -278,9 +278,9 @@ export const FOOTER_COLUMNS = [
     title: "Innovation",
     links: [
       { label: "Scientific Pipeline", path: "/innovation" },
-      { label: "Filed Products",      path: "/innovation#products" },
-      { label: "Publications",        path: "/publications" },
-      { label: "Patents",             path: "/patents" },
+      { label: "Filed Products", path: "/innovation#products" },
+      { label: "Publications", path: "/publications" },
+      { label: "Patents", path: "/patents" },
     ],
   },
   {
@@ -288,19 +288,19 @@ export const FOOTER_COLUMNS = [
     title: "Career",
     links: [
       { label: "Sai Life Sciences", path: "/career#sai" },
-      { label: "Glenmark",          path: "/career#glenmark" },
-      { label: "Dr. Reddy's",       path: "/career#drl" },
-      { label: "Awards",            path: "/recognition#awards" },
-      { label: "Invited Talks",     path: "/recognition#talks" },
+      { label: "Glenmark", path: "/career#glenmark" },
+      { label: "Dr. Reddy's", path: "/career#drl" },
+      { label: "Awards", path: "/recognition#awards" },
+      { label: "Invited Talks", path: "/recognition#talks" },
     ],
   },
   {
     id: "contact",
     title: "Contact",
     links: [
-      { label: "Collaborate",    path: "/contact" },
-      { label: "LinkedIn",       path: CONTACT.linkedin, external: true },
-      { label: "Google Scholar", path: CONTACT.scholar,  external: true },
+      { label: "Collaborate", path: "/contact" },
+      { label: "LinkedIn", path: CONTACT.linkedin, external: true },
+      { label: "Google Scholar", path: CONTACT.scholar, external: true },
     ],
   },
 ];
