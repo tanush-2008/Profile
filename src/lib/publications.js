@@ -1,412 +1,79 @@
-/**
- * Publications data for Dr. Vishweshwar Peddy
- * Source: VP_Annexure.pdf
- * DOI links constructed from documented identifiers where available.
- */
+// Source of truth: src/content/publications.json (transcribed from VP_Annexure.pdf, pp. 24–34)
+import raw from "../content/publications.json";
 
-export const PUBLICATIONS = [
-  {
-    id: "pub01",
-    year: 2024,
-    title: "Pharmaceutical Cocrystals: Design, Characterisation and Development",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub02",
-    year: 2023,
-    title: "Crystal Engineering of Pharmaceutical Solids: From Polymorph Screening to Scale-Up",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Pharmaceutical Sciences",
-    topic: "Crystallisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub03",
-    year: 2023,
-    title: "Amorphous Solid Dispersions: Stability Prediction and Formulation Strategies",
-    authors: "Peddy V, et al.",
-    journal: "European Journal of Pharmaceutics and Biopharmaceutics",
-    topic: "Amorphous Systems",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub04",
-    year: 2022,
-    title: "Crystal Structure Prediction in Pharmaceutical Development: A Practical Perspective",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "CSP",
-    type: "Perspective",
-    doi: null,
-  },
-  {
-    id: "pub05",
-    year: 2022,
-    title: "Salt and Cocrystal Screening: Strategy, Methods and Decision-Making",
-    authors: "Peddy V, et al.",
-    journal: "Drug Discovery Today",
-    topic: "Cocrystals",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub06",
-    year: 2021,
-    title: "Particle Engineering Strategies for Inhalation Drug Products",
-    authors: "Peddy V, et al.",
-    journal: "International Journal of Pharmaceutics",
-    topic: "Particle Science",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub07",
-    year: 2021,
-    title: "In-Situ Raman Spectroscopy for Crystallisation Monitoring and Polymorph Control",
-    authors: "Peddy V, et al.",
-    journal: "Organic Process Research & Development",
-    topic: "PAT",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub08",
-    year: 2020,
-    title: "Pharmaceutical Polymorphism: A Comprehensive Review of Characterisation Techniques",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Pharmaceutical and Biomedical Analysis",
-    topic: "Polymorphism",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub09",
-    year: 2020,
-    title: "Non-Covalent Interactions in Pharmaceutical Cocrystal Design",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub10",
-    year: 2019,
-    title: "Hot-Stage Microscopy in Solid-Form Screening: Applications and Interpretation",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Pharmaceutical Sciences",
-    topic: "Characterisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub11",
-    year: 2019,
-    title: "Dynamic Vapour Sorption in Hydrate and Solvate Characterisation",
-    authors: "Peddy V, et al.",
-    journal: "AAPS PharmSciTech",
-    topic: "Characterisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub12",
-    year: 2018,
-    title: "Seeding in Pharmaceutical Crystallisation: Science and Practice",
-    authors: "Peddy V, et al.",
-    journal: "Organic Process Research & Development",
-    topic: "Crystallisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub13",
-    year: 2018,
-    title: "Solid-State NMR in Polymorph and Cocrystal Characterisation",
-    authors: "Peddy V, et al.",
-    journal: "Solid State Nuclear Magnetic Resonance",
-    topic: "Characterisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub14",
-    year: 2017,
-    title: "Pharmaceutical Cocrystals: Regulatory Landscape and Development Considerations",
-    authors: "Peddy V, et al.",
-    journal: "European Journal of Pharmaceutics and Biopharmaceutics",
-    topic: "Regulatory",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub15",
-    year: 2017,
-    title: "Crystal Engineering with Nicotinamide: A Versatile Coformer in Pharmaceutical Cocrystals",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub16",
-    year: 2016,
-    title: "Controlling Nucleation in Pharmaceutical Crystallisation: Theory and Practical Approaches",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Crystallisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub17",
-    year: 2016,
-    title: "Powder X-Ray Diffraction in Pharmaceutical Solid-Form Analysis",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Pharmaceutical Sciences",
-    topic: "Characterisation",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub18",
-    year: 2015,
-    title: "Salt Selection in Drug Development: Physicochemical and Biological Considerations",
-    authors: "Peddy V, et al.",
-    journal: "Drug Discovery Today",
-    topic: "Polymorphism",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub19",
-    year: 2015,
-    title: "Multicomponent Pharmaceutical Cocrystals: Crystal Engineering Strategy and IP Considerations",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub20",
-    year: 2014,
-    title: "Process Analytical Technology for Crystallisation Monitoring: FBRM and Raman Applications",
-    authors: "Peddy V, et al.",
-    journal: "Organic Process Research & Development",
-    topic: "PAT",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub21",
-    year: 2014,
-    title: "Amorphous Pharmaceutical Solids: Stability, Characterisation and Development",
-    authors: "Peddy V, et al.",
-    journal: "International Journal of Pharmaceutics",
-    topic: "Amorphous Systems",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub22",
-    year: 2013,
-    title: "Crystallographic Analysis of Pharmaceutical Solvates and Hydrates",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Polymorphism",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub23",
-    year: 2013,
-    title: "Pharmaceutical Crystal Engineering: A Decade of Progress",
-    authors: "Peddy V, et al.",
-    journal: "Chemical Society Reviews",
-    topic: "Cocrystals",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub24",
-    year: 2012,
-    title: "Cocrystal Polymorphism: Implications for Drug Development and IP",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub25",
-    year: 2012,
-    title: "Supramolecular Synthons in Pharmaceutical Crystal Engineering",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub26",
-    year: 2011,
-    title: "Scale-Up of Pharmaceutical Crystallisation: Challenges and Strategies",
-    authors: "Peddy V, et al.",
-    journal: "Organic Process Research & Development",
-    topic: "Crystallisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub27",
-    year: 2011,
-    title: "Thermal Analysis in Pharmaceutical Polymorph Characterisation",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Thermal Analysis and Calorimetry",
-    topic: "Characterisation",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub28",
-    year: 2010,
-    title: "Mechanochemical Synthesis of Pharmaceutical Cocrystals",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub29",
-    year: 2010,
-    title: "Pharmaceutical Applications of Crystal Engineering: A Review",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "Cocrystals",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub30",
-    year: 2009,
-    title: "Role of Crystal Engineering in Drug Discovery and Development",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Medicinal Chemistry",
-    topic: "Polymorphism",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub31",
-    year: 2009,
-    title: "Caffeine as a Model Coformer in Pharmaceutical Cocrystal Development",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub32",
-    year: 2008,
-    title: "Pharmaceutical Polymorphism: Crystal Structure Landscape and Solid-Form Selection",
-    authors: "Peddy V, et al.",
-    journal: "Advanced Drug Delivery Reviews",
-    topic: "Polymorphism",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub33",
-    year: 2008,
-    title: "Cocrystal Solubility and Dissolution: Theory and Implications for Bioavailability",
-    authors: "Peddy V, et al.",
-    journal: "Molecular Pharmaceutics",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub34",
-    year: 2007,
-    title: "Hydrogen Bond Networks in Pharmaceutical Cocrystals",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub35",
-    year: 2007,
-    title: "Cambridge Structural Database Analysis of Pharmaceutical Solid Forms",
-    authors: "Peddy V, et al.",
-    journal: "CrystEngComm",
-    topic: "CSP",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub36",
-    year: 2006,
-    title: "Pharmaceutical Cocrystals: Crystal Engineering Strategy Using Complementary H-Bond Donors and Acceptors",
-    authors: "Peddy V, et al.",
-    journal: "Journal of the American Chemical Society",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub37",
-    year: 2005,
-    title: "Crystal Structures of Pharmaceutical Cocrystals: Fluoxetine Hydrochloride with Carboxylic Acids",
-    authors: "Peddy V, et al.",
-    journal: "Chemical Communications",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: "10.1039/b416672e",
-  },
-  {
-    id: "pub38",
-    year: 2005,
-    title: "Polymorphism in Pharmaceutical Crystals: A Structural Analysis",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Polymorphism",
-    type: "Research Article",
-    doi: null,
-  },
-  {
-    id: "pub39",
-    year: 2004,
-    title: "Solid-State Chemistry of Pharmaceuticals: An Overview",
-    authors: "Peddy V, et al.",
-    journal: "Journal of Pharmaceutical Sciences",
-    topic: "Polymorphism",
-    type: "Review",
-    doi: null,
-  },
-  {
-    id: "pub40",
-    year: 2003,
-    title: "Crystal Engineering Approaches to Pharmaceutical Solid Forms",
-    authors: "Peddy V, et al.",
-    journal: "Crystal Growth & Design",
-    topic: "Cocrystals",
-    type: "Research Article",
-    doi: null,
-  },
-];
+const NOTE_RE = /citations|accessed|ranks|cover|downloaded|newsletter/i;
+const NOTE_START = /^(o\s|[a-d]\.\s|This paper|Secured|Received|See\s)/;
+const cleanNote = (l) =>
+  l.replace(/^(?:o|[a-d]\.)\s*/, "").replace(/^This paper has\s+/i, "").replace(/\s+/g, " ").trim().replace(/^\w/, (c) => c.toUpperCase());
+
+// Group the wrapped source lines that follow the URL into whole notes
+const extractNotes = (sourceText) => {
+  const lines = sourceText.split("\n").map((s) => s.trim()).filter(Boolean);
+  const start = lines.findIndex((l) => /^https?:\/\//.test(l));
+  if (start < 0) return [];
+  const notes = [];
+  for (const l of lines.slice(start + 1)) {
+    if (/^https?:\/\//.test(l) || /^See\s+http/i.test(l)) continue;
+    if (NOTE_START.test(l) || notes.length === 0) notes.push(l);
+    else notes[notes.length - 1] += ` ${l}`;
+  }
+  return notes.filter((n) => NOTE_RE.test(n)).map(cleanNote);
+};
+
+const journalOf = (p) => {
+  if (p.type === "Book chapter") return "Frontiers in Crystal Engineering (Wiley)";
+  return p.citation.split(",")[0].trim();
+};
+
+// The J. Pharm. Sci. review is cited at two different figures inside the source
+// documents (>1,250 in VP.pdf p.5 & Annexure p.4; >2,570 in Annexure p.24).
+// The conservative, lower figure is shown.
+const CITATION_OVERRIDES = { "publication-2": 1250 };
+
+export const PUBLICATIONS = raw.map((p) => {
+  const notes = extractNotes(p.sourceText)
+    .filter((n) => !(p.id in CITATION_OVERRIDES && /citations/i.test(n)));
+  const m = p.sourceText.match(/>\s?(\d[\d,]*)\s+citations/i);
+  const citations = CITATION_OVERRIDES[p.id] ?? (m ? parseInt(m[1].replace(/,/g, ""), 10) : null);
+  return {
+    id: p.id,
+    number: p.number,
+    year: p.year,
+    title: p.title,
+    authors: p.authors,
+    citation: p.citation,
+    journal: journalOf(p),
+    type: p.type,
+    topic: p.topic,
+    doi: p.doi,
+    url: p.url,
+    corresponding: p.corresponding,
+    citations,
+    notes,
+    sourcePages: p.source.pages,
+  };
+}).sort((a, b) => b.year - a.year || a.number - b.number);
 
 export const PUB_TOPICS = [...new Set(PUBLICATIONS.map((p) => p.topic))].sort();
 export const PUB_YEARS  = [...new Set(PUBLICATIONS.map((p) => p.year))].sort((a, b) => b - a);
 export const PUB_TYPES  = [...new Set(PUBLICATIONS.map((p) => p.type))].sort();
+
+export const HIGHLY_CITED = [...PUBLICATIONS]
+  .filter((p) => p.citations)
+  .sort((a, b) => b.citations - a.citations)
+  .slice(0, 4);
+
+// Citation impact — VP_Annexure.pdf p.2 (Google Scholar, May 2026)
+export const PUB_STATS = {
+  total: 40,
+  articles: 38,
+  bookChapters: 1,
+  reviews: 1,
+  citations: ">6,700",
+  hIndex: 24,
+  i10Index: 37,
+  over50: 18,
+  asOf: "May 2026",
+};
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInB1YmxpY2F0aW9ucy5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBTb3VyY2Ugb2YgdHJ1dGg6IHNyYy9jb250ZW50L3B1YmxpY2F0aW9ucy5qc29uICh0cmFuc2NyaWJlZCBmcm9tIFZQX0FubmV4dXJlLnBkZiwgcHAuIDI04oCTMzQpXG5pbXBvcnQgcmF3IGZyb20gXCIvc3JjL2NvbnRlbnQvcHVibGljYXRpb25zLmpzb24/aW1wb3J0XCI7XG5cbmNvbnN0IE5PVEVfUkUgPSAvY2l0YXRpb25zfGFjY2Vzc2VkfHJhbmtzfGNvdmVyfGRvd25sb2FkZWR8bmV3c2xldHRlci9pO1xuY29uc3QgTk9URV9TVEFSVCA9IC9eKG9cXHN8W2EtZF1cXC5cXHN8VGhpcyBwYXBlcnxTZWN1cmVkfFJlY2VpdmVkfFNlZVxccykvO1xuY29uc3QgY2xlYW5Ob3RlID0gKGwpID0+XG4gIGwucmVwbGFjZSgvXig/Om98W2EtZF1cXC4pXFxzKi8sIFwiXCIpLnJlcGxhY2UoL15UaGlzIHBhcGVyIGhhc1xccysvaSwgXCJcIikucmVwbGFjZSgvXFxzKy9nLCBcIiBcIikudHJpbSgpLnJlcGxhY2UoL15cXHcvLCAoYykgPT4gYy50b1VwcGVyQ2FzZSgpKTtcblxuLy8gR3JvdXAgdGhlIHdyYXBwZWQgc291cmNlIGxpbmVzIHRoYXQgZm9sbG93IHRoZSBVUkwgaW50byB3aG9sZSBub3Rlc1xuY29uc3QgZXh0cmFjdE5vdGVzID0gKHNvdXJjZVRleHQpID0+IHtcbiAgY29uc3QgbGluZXMgPSBzb3VyY2VUZXh0LnNwbGl0KFwiXFxuXCIpLm1hcCgocykgPT4gcy50cmltKCkpLmZpbHRlcihCb29sZWFuKTtcbiAgY29uc3Qgc3RhcnQgPSBsaW5lcy5maW5kSW5kZXgoKGwpID0+IC9eaHR0cHM/OlxcL1xcLy8udGVzdChsKSk7XG4gIGlmIChzdGFydCA8IDApIHJldHVybiBbXTtcbiAgY29uc3Qgbm90ZXMgPSBbXTtcbiAgZm9yIChjb25zdCBsIG9mIGxpbmVzLnNsaWNlKHN0YXJ0ICsgMSkpIHtcbiAgICBpZiAoL15odHRwcz86XFwvXFwvLy50ZXN0KGwpIHx8IC9eU2VlXFxzK2h0dHAvaS50ZXN0KGwpKSBjb250aW51ZTtcbiAgICBpZiAoTk9URV9TVEFSVC50ZXN0KGwpIHx8IG5vdGVzLmxlbmd0aCA9PT0gMCkgbm90ZXMucHVzaChsKTtcbiAgICBlbHNlIG5vdGVzW25vdGVzLmxlbmd0aCAtIDFdICs9IGAgJHtsfWA7XG4gIH1cbiAgcmV0dXJuIG5vdGVzLmZpbHRlcigobikgPT4gTk9URV9SRS50ZXN0KG4pKS5tYXAoY2xlYW5Ob3RlKTtcbn07XG5cbmNvbnN0IGpvdXJuYWxPZiA9IChwKSA9PiB7XG4gIGlmIChwLnR5cGUgPT09IFwiQm9vayBjaGFwdGVyXCIpIHJldHVybiBcIkZyb250aWVycyBpbiBDcnlzdGFsIEVuZ2luZWVyaW5nIChXaWxleSlcIjtcbiAgcmV0dXJuIHAuY2l0YXRpb24uc3BsaXQoXCIsXCIpWzBdLnRyaW0oKTtcbn07XG5cbi8vIFRoZSBKLiBQaGFybS4gU2NpLiByZXZpZXcgaXMgY2l0ZWQgYXQgdHdvIGRpZmZlcmVudCBmaWd1cmVzIGluc2lkZSB0aGUgc291cmNlXG4vLyBkb2N1bWVudHMgKD4xLDI1MCBpbiBWUC5wZGYgcC41ICYgQW5uZXh1cmUgcC40OyA+Miw1NzAgaW4gQW5uZXh1cmUgcC4yNCkuXG4vLyBUaGUgY29uc2VydmF0aXZlLCBsb3dlciBmaWd1cmUgaXMgc2hvd24uXG5jb25zdCBDSVRBVElPTl9PVkVSUklERVMgPSB7IFwicHVibGljYXRpb24tMlwiOiAxMjUwIH07XG5cbmV4cG9ydCBjb25zdCBQVUJMSUNBVElPTlMgPSByYXcubWFwKChwKSA9PiB7XG4gIGNvbnN0IG5vdGVzID0gZXh0cmFjdE5vdGVzKHAuc291cmNlVGV4dClcbiAgICAuZmlsdGVyKChuKSA9PiAhKHAuaWQgaW4gQ0lUQVRJT05fT1ZFUlJJREVTICYmIC9jaXRhdGlvbnMvaS50ZXN0KG4pKSk7XG4gIGNvbnN0IG0gPSBwLnNvdXJjZVRleHQubWF0Y2goLz5cXHM/KFxcZFtcXGQsXSopXFxzK2NpdGF0aW9ucy9pKTtcbiAgY29uc3QgY2l0YXRpb25zID0gQ0lUQVRJT05fT1ZFUlJJREVTW3AuaWRdID8/IChtID8gcGFyc2VJbnQobVsxXS5yZXBsYWNlKC8sL2csIFwiXCIpLCAxMCkgOiBudWxsKTtcbiAgcmV0dXJuIHtcbiAgICBpZDogcC5pZCxcbiAgICBudW1iZXI6IHAubnVtYmVyLFxuICAgIHllYXI6IHAueWVhcixcbiAgICB0aXRsZTogcC50aXRsZSxcbiAgICBhdXRob3JzOiBwLmF1dGhvcnMsXG4gICAgY2l0YXRpb246IHAuY2l0YXRpb24sXG4gICAgam91cm5hbDogam91cm5hbE9mKHApLFxuICAgIHR5cGU6IHAudHlwZSxcbiAgICB0b3BpYzogcC50b3BpYyxcbiAgICBkb2k6IHAuZG9pLFxuICAgIHVybDogcC51cmwsXG4gICAgY29ycmVzcG9uZGluZzogcC5jb3JyZXNwb25kaW5nLFxuICAgIGNpdGF0aW9ucyxcbiAgICBub3RlcyxcbiAgICBzb3VyY2VQYWdlczogcC5zb3VyY2UucGFnZXMsXG4gIH07XG59KS5zb3J0KChhLCBiKSA9PiBiLnllYXIgLSBhLnllYXIgfHwgYS5udW1iZXIgLSBiLm51bWJlcik7XG5cbmV4cG9ydCBjb25zdCBQVUJfVE9QSUNTID0gWy4uLm5ldyBTZXQoUFVCTElDQVRJT05TLm1hcCgocCkgPT4gcC50b3BpYykpXS5zb3J0KCk7XG5leHBvcnQgY29uc3QgUFVCX1lFQVJTICA9IFsuLi5uZXcgU2V0KFBVQkxJQ0FUSU9OUy5tYXAoKHApID0+IHAueWVhcikpXS5zb3J0KChhLCBiKSA9PiBiIC0gYSk7XG5leHBvcnQgY29uc3QgUFVCX1RZUEVTICA9IFsuLi5uZXcgU2V0KFBVQkxJQ0FUSU9OUy5tYXAoKHApID0+IHAudHlwZSkpXS5zb3J0KCk7XG5cbmV4cG9ydCBjb25zdCBISUdITFlfQ0lURUQgPSBbLi4uUFVCTElDQVRJT05TXVxuICAuZmlsdGVyKChwKSA9PiBwLmNpdGF0aW9ucylcbiAgLnNvcnQoKGEsIGIpID0+IGIuY2l0YXRpb25zIC0gYS5jaXRhdGlvbnMpXG4gIC5zbGljZSgwLCA0KTtcblxuLy8gQ2l0YXRpb24gaW1wYWN0IOKAlCBWUF9Bbm5leHVyZS5wZGYgcC4yIChHb29nbGUgU2Nob2xhciwgTWF5IDIwMjYpXG5leHBvcnQgY29uc3QgUFVCX1NUQVRTID0ge1xuICB0b3RhbDogNDAsXG4gIGFydGljbGVzOiAzOCxcbiAgYm9va0NoYXB0ZXJzOiAxLFxuICByZXZpZXdzOiAxLFxuICBjaXRhdGlvbnM6IFwiPjYsNzAwXCIsXG4gIGhJbmRleDogMjQsXG4gIGkxMEluZGV4OiAzNyxcbiAgb3ZlcjUwOiAxOCxcbiAgYXNPZjogXCJNYXkgMjAyNlwiLFxufTtcbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUFDLEtBQUssQ0FBQyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFO0FBQzlGLE1BQU0sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDOztBQUV2RCxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUM7QUFDdkUsS0FBSyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDdkUsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ3ZCLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQzs7QUFFMUksQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQztBQUNqRSxLQUFLLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ3JDLENBQUMsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQztBQUMzRSxDQUFDLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDOUQsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztBQUMxQixDQUFDLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ2xCLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUMxQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxRQUFRO0FBQ2xFLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7QUFDL0QsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDM0MsQ0FBQyxDQUFDO0FBQ0YsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUM7QUFDNUQsQ0FBQzs7QUFFRCxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ3pCLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxTQUFTLENBQUMsRUFBRSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUNsRixDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN4QyxDQUFDOztBQUVELENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUFDLEtBQUssQ0FBQyxFQUFFLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQztBQUMxRSxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO0FBQzNFLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLEVBQUUsQ0FBQyxLQUFLO0FBQzFDLEtBQUssQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7O0FBRXBELE1BQU0sQ0FBQyxLQUFLLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDM0MsQ0FBQyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsVUFBVTtBQUN6QyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLGtCQUFrQixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUN6RSxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztBQUM3RCxDQUFDLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsa0JBQWtCLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztBQUNqRyxDQUFDLENBQUMsTUFBTSxDQUFDO0FBQ1QsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRTtBQUNaLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU07QUFDcEIsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSTtBQUNoQixDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLO0FBQ2xCLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU87QUFDdEIsQ0FBQyxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsUUFBUTtBQUN4QixDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7QUFDekIsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSTtBQUNoQixDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLO0FBQ2xCLENBQUMsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUc7QUFDZCxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHO0FBQ2QsQ0FBQyxDQUFDLENBQUMsQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDLENBQUMsYUFBYTtBQUNsQyxDQUFDLENBQUMsQ0FBQyxDQUFDLFNBQVM7QUFDYixDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUs7QUFDVCxDQUFDLENBQUMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSztBQUMvQixDQUFDLENBQUMsQ0FBQztBQUNILENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQzs7QUFFekQsTUFBTSxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUMvRSxNQUFNLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDN0YsTUFBTSxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLFlBQVksQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDOztBQUU5RSxNQUFNLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxZQUFZO0FBQzVDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTO0FBQzVCLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTO0FBQzNDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7O0FBRWQsQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsQ0FBQyxJQUFJO0FBQ2xFLE1BQU0sQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztBQUN6QixDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtBQUNYLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxFQUFFO0FBQ2QsQ0FBQyxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7QUFDakIsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7QUFDWixDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUM7QUFDckIsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLEVBQUU7QUFDWixDQUFDLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRTtBQUNkLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxFQUFFO0FBQ1osQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQztBQUNsQixDQUFDOyJ9

@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal, SplitLines, EASE } from "@/components/motion";
-import { PUBLICATIONS, PUB_TOPICS, PUB_YEARS, PUB_TYPES } from "@/lib/publications";
+import { PUBLICATIONS, PUB_TOPICS, PUB_YEARS, PUB_TYPES, PUB_STATS, HIGHLY_CITED } from "@/lib/publications";
+import { CONTACT } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { SEO } from "@/components/SEO";
 
 const slug = (s) => String(s).toLowerCase().replace(/\s+/g, "-");
+const fmt = (n) => n.toLocaleString("en-US");
 
 const FilterChip = ({ label, active, onClick, testid }) => (
   <button
@@ -26,31 +28,34 @@ const FilterChip = ({ label, active, onClick, testid }) => (
 );
 
 const FilterGroup = ({ label, options, value, onChange, prefix }) => (
-  <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
+  <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 sm:gap-x-8">
     <span className="eyebrow w-16 text-graphite">{label}</span>
     {["All", ...options].map((o) => (
-      <FilterChip
-        key={o}
-        label={o}
-        active={value === o}
-        onClick={() => onChange(o)}
-        testid={`pub-filter-${prefix}-${slug(o)}`}
-      />
+      <FilterChip key={o} label={o} active={value === o} onClick={() => onChange(o)} testid={`pub-filter-${prefix}-${slug(o)}`} />
     ))}
   </div>
 );
 
-const PubRow = ({ p, i, showYearDivider, year }) => {
+const Authors = ({ text, corresponding }) => {
+  const parts = text.split(/(Peddy Vishweshwar\*?)/);
+  return (
+    <span>
+      {parts.map((s, i) => /^Peddy Vishweshwar/.test(s) ? <strong key={i} className="font-semibold text-onyx">{s}</strong> : s)}
+      {corresponding && <span className="ml-2 font-mono text-[9px] uppercase tracking-[0.15em] text-copper">Corresponding author</span>}
+    </span>
+  );
+};
+
+const PubRow = ({ p, i, showYearDivider }) => {
   const [open, setOpen] = useState(false);
-  const doiUrl = p.doi ? `https://doi.org/${p.doi}` : null;
+  const link = p.url || (p.doi ? `https://doi.org/${p.doi}` : null);
 
   return (
     <>
-      {/* Year divider */}
       {showYearDivider && (
-        <li className="border-b border-black/06 py-4 flex items-center gap-4" aria-hidden>
-          <span className="font-display text-2xl font-bold text-onyx/15 sm:text-3xl">{year}</span>
-          <span className="flex-1 h-px bg-black/06" />
+        <li className="flex items-center gap-4 border-b border-black/06 py-4" aria-hidden>
+          <span className="font-display text-2xl font-bold text-onyx/15 sm:text-3xl">{p.year}</span>
+          <span className="h-px flex-1 bg-black/06" />
         </li>
       )}
       <motion.li
@@ -58,28 +63,27 @@ const PubRow = ({ p, i, showYearDivider, year }) => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.45, ease: EASE, delay: i * 0.02 }}
+        transition={{ duration: 0.45, ease: EASE, delay: Math.min(i * 0.02, 0.3) }}
         data-testid={`pub-row-${p.id}`}
-        className="border-b border-black/08 archive-row"
+        className="archive-row border-b border-black/08"
       >
         <button
           onClick={() => setOpen((v) => !v)}
-          className="w-full py-6 lg:py-8 text-left grid grid-cols-12 gap-x-4 gap-y-2"
+          aria-expanded={open}
+          data-testid={`pub-toggle-${p.id}`}
+          className="grid w-full grid-cols-12 gap-x-4 gap-y-2 py-6 text-left lg:py-8"
         >
-          <span className="col-span-3 font-mono text-[11px] text-graphite lg:col-span-1">
-            {p.year}
-          </span>
-          <span className="col-span-9 font-mono text-[9px] uppercase tracking-[0.2em] text-graphite lg:col-span-2">
-            {p.type}
-          </span>
-          <h3 className="col-span-12 font-display text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 hover:text-copper sm:text-xl lg:col-span-6 lg:text-2xl">
+          <span className="col-span-3 font-mono text-[11px] text-graphite lg:col-span-1">{p.year}</span>
+          <span className="col-span-9 font-mono text-[9px] uppercase tracking-[0.2em] text-graphite lg:col-span-2">{p.type}</span>
+          <h3 className={cn(
+            "col-span-12 font-display text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 sm:text-xl lg:col-span-6 lg:text-2xl",
+            open ? "text-copper" : "hover:text-copper"
+          )}>
             {p.title}
           </h3>
-          <span className="col-span-8 text-sm text-graphite lg:col-span-2">
-            {p.authors}
-          </span>
+          <span className="col-span-8 text-sm text-graphite lg:col-span-2">{p.journal}</span>
           <span className="col-span-4 text-right font-mono text-[9px] uppercase tracking-[0.15em] text-onyx lg:col-span-1">
-            {p.topic}
+            {p.citations ? <>&gt;{fmt(p.citations)} cit.</> : p.topic}
           </span>
         </button>
 
@@ -91,24 +95,34 @@ const PubRow = ({ p, i, showYearDivider, year }) => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.45, ease: EASE }}
               className="overflow-hidden"
+              data-testid={`pub-detail-${p.id}`}
             >
-              <div className="pb-6 grid grid-cols-12 gap-x-4">
-                <div className="col-span-12 lg:col-span-4 lg:col-start-3 space-y-3">
-                  <div className="eyebrow text-graphite">Journal</div>
-                  <p className="text-sm text-onyx">{p.journal}</p>
+              <div className="grid grid-cols-12 gap-x-4 gap-y-6 pb-8 lg:pb-10">
+                <div className="col-span-12 lg:col-span-6 lg:col-start-4">
+                  <div className="eyebrow text-graphite mb-2">Authors</div>
+                  <p className="text-sm leading-relaxed text-graphite"><Authors text={p.authors} corresponding={p.corresponding} /></p>
+                  <div className="eyebrow text-graphite mb-2 mt-5">Citation</div>
+                  <p className="text-sm text-onyx">{p.citation}</p>
+                  {p.notes.length > 0 && (
+                    <ul className="mt-5 space-y-1.5">
+                      {p.notes.map((n) => (
+                        <li key={n} className="flex items-baseline gap-3 text-sm text-graphite">
+                          <span className="h-px w-3 flex-shrink-0 translate-y-[-2px] bg-copper/60" />{n}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {doiUrl && (
-                  <div className="col-span-12 lg:col-span-4 lg:col-start-8">
-                    <a
-                      href={doiUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-copper hover:text-copper"
-                    >
-                      DOI: {p.doi} →
+                <div className="col-span-12 space-y-4 lg:col-span-3 lg:col-start-10">
+                  {link && (
+                    <a href={link} target="_blank" rel="noopener noreferrer" data-testid={`pub-link-${p.id}`}
+                       className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-copper">
+                      {p.doi ? `DOI ${p.doi}` : "View publication"} →
                     </a>
-                  </div>
-                )}
+                  )}
+                  <div className="eyebrow text-graphite/70">Topic · {p.topic}</div>
+                  <div className="eyebrow text-graphite/50">Source · Annexure p. {p.sourcePages.join(", ")}</div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -117,6 +131,26 @@ const PubRow = ({ p, i, showYearDivider, year }) => {
     </>
   );
 };
+
+const HighlyCited = () => (
+  <Reveal delay={0.6}>
+    <div className="mt-16 border-t border-white/08 pt-8">
+      <div className="mb-6 flex items-baseline justify-between eyebrow text-dust">
+        <span>Most cited works</span>
+        <span className="hidden sm:block">Google Scholar · {PUB_STATS.asOf}</span>
+      </div>
+      <div className="grid grid-cols-1 gap-px bg-white/08 sm:grid-cols-2 lg:grid-cols-4">
+        {HIGHLY_CITED.map((p) => (
+          <div key={p.id} data-testid={`highly-cited-${p.id}`} className="bg-ink p-5 lg:p-6">
+            <div className="font-display text-3xl font-bold text-copper lg:text-4xl">&gt;{fmt(p.citations)}</div>
+            <p className="mt-3 line-clamp-3 text-sm leading-snug text-bone/80">{p.title}</p>
+            <p className="mt-2 eyebrow text-dust">{p.journal} · {p.year}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Reveal>
+);
 
 export default function Publications() {
   const [year, setYear]   = useState("All");
@@ -130,31 +164,28 @@ export default function Publications() {
       (year === "All" || p.year === year) &&
       (topic === "All" || p.topic === topic) &&
       (type === "All" || p.type === type) &&
-      (!q || p.title.toLowerCase().includes(q) || p.journal.toLowerCase().includes(q))
+      (!q || p.title.toLowerCase().includes(q) || p.journal.toLowerCase().includes(q) || p.authors.toLowerCase().includes(q))
     );
   }, [year, topic, type, search]);
 
   const hasFilter = year !== "All" || topic !== "All" || type !== "All" || search;
 
-  // Compute year dividers
   const yearDividers = useMemo(() => {
     const seen = new Set();
     return results.map((p) => {
-      if (!seen.has(p.year) && year === "All") {
-        seen.add(p.year);
-        return true;
-      }
-      return false;
+      if (year !== "All" || seen.has(p.year)) return false;
+      seen.add(p.year);
+      return true;
     });
   }, [results, year]);
 
   return (
     <main data-testid="page-publications">
-      <SEO 
-        title="Peer-Reviewed Publications" 
-        description="40 peer-reviewed publications spanning polymorphism, crystal engineering, pharmaceutical cocrystals, amorphous systems and solid-state characterisation." 
+      <SEO
+        title="Peer-Reviewed Publications"
+        description="40 peer-reviewed publications — 38 research articles, a book chapter and a review — on polymorphism, crystal engineering and pharmaceutical co-crystals. >6,700 citations, h-index 24."
+        path="/publications"
       />
-      {/* Header */}
       <section className="min-h-[50svh] bg-ink px-6 pb-20 pt-36 text-bone lg:px-12 lg:pt-48">
         <div className="relative z-10">
           <span className="section-label">Peer-reviewed research</span>
@@ -167,90 +198,82 @@ export default function Publications() {
           />
           <Reveal delay={0.5} className="mt-10 max-w-2xl lg:ml-auto lg:max-w-xl">
             <p className="text-base leading-relaxed text-dust sm:text-lg">
-              Research spanning polymorphism, crystal engineering, pharmaceutical cocrystals, amorphous systems and solid-state characterisation.
+              {PUB_STATS.articles} original research articles, {PUB_STATS.bookChapters} book chapter and {PUB_STATS.reviews} comprehensive review — spanning polymorphism, crystal engineering, pharmaceutical co-crystals and solid-state structural characterisation.
             </p>
           </Reveal>
         </div>
 
-        {/* Dramatic stat line */}
         <Reveal delay={0.6}>
-          <div className="mt-16 border-t border-white/08 pt-8 flex flex-wrap gap-x-12 gap-y-4 items-baseline">
-            <div>
-              <span className="font-display text-4xl font-bold text-bone lg:text-5xl">40</span>
-              <span className="eyebrow text-dust ml-3">Publications</span>
-            </div>
-            <div>
-              <span className="font-display text-4xl font-bold text-copper lg:text-5xl">&gt;6,700</span>
-              <span className="eyebrow text-dust ml-3">Citations</span>
-            </div>
-            <div>
-              <span className="font-display text-4xl font-bold text-bone lg:text-5xl">24</span>
-              <span className="eyebrow text-dust ml-3">H-index</span>
-            </div>
+          <div className="mt-16 flex flex-wrap items-baseline gap-x-12 gap-y-6 border-t border-white/08 pt-8">
+            {[
+              [PUB_STATS.citations, "Citations", true],
+              [PUB_STATS.hIndex, "H-index"],
+              [PUB_STATS.i10Index, "i10-index"],
+              [PUB_STATS.over50, "Papers with >50 citations"],
+            ].map(([v, l, accent]) => (
+              <div key={l} data-testid={`pub-stat-${slug(l)}`}>
+                <span className={cn("font-display text-4xl font-bold lg:text-5xl", accent ? "text-copper" : "text-bone")}>{v}</span>
+                <span className="eyebrow text-dust ml-3">{l}</span>
+              </div>
+            ))}
+            <a href={CONTACT.scholar} target="_blank" rel="noopener noreferrer" data-testid="pub-scholar-link"
+               className="link-underline ml-auto font-mono text-[10px] uppercase tracking-[0.2em] text-dust hover:text-bone">
+              Google Scholar ↗
+            </a>
           </div>
         </Reveal>
+
+        <HighlyCited />
       </section>
 
-      {/* Archive */}
       <section className="bg-bone px-6 py-16 text-onyx lg:px-12 lg:py-24">
-        {/* Search */}
         <Reveal className="mb-10">
           <div className="relative max-w-lg">
+            <label htmlFor="pub-search" className="sr-only">Search publications</label>
             <input
+              id="pub-search"
               type="search"
-              placeholder="Search publications…"
+              placeholder="Search by title, journal or author…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               data-testid="pub-search"
-              className="field pr-10 text-onyx placeholder:text-graphite"
+              className="field pr-16 text-onyx placeholder:text-graphite"
               style={{ color: "var(--onyx)", borderBottomColor: "rgba(0,0,0,0.2)" }}
             />
-            <span className="absolute right-0 bottom-3 font-mono text-[10px] text-graphite pointer-events-none">
-              SEARCH
-            </span>
+            <span className="pointer-events-none absolute bottom-3 right-0 font-mono text-[10px] text-graphite">SEARCH</span>
           </div>
         </Reveal>
 
-        {/* Filters */}
         <Reveal className="space-y-5 border-b border-black/10 pb-8">
           <FilterGroup label="Year"  prefix="year"  options={PUB_YEARS}  value={year}  onChange={setYear} />
           <FilterGroup label="Topic" prefix="topic" options={PUB_TOPICS} value={topic} onChange={setTopic} />
           <FilterGroup label="Type"  prefix="type"  options={PUB_TYPES}  value={type}  onChange={setType} />
         </Reveal>
 
-        {/* Results header */}
         <div className="mt-6 flex items-baseline justify-between eyebrow text-graphite">
-          <span data-testid="pub-results-count">
-            {results.length} {results.length === 1 ? "publication" : "publications"}
-          </span>
+          <span data-testid="pub-results-count">{results.length} {results.length === 1 ? "publication" : "publications"}</span>
           {hasFilter && (
             <button
               data-testid="pub-filter-reset"
               onClick={() => { setYear("All"); setTopic("All"); setType("All"); setSearch(""); }}
-              className="link-underline text-copper font-mono text-[10px] uppercase tracking-[0.2em]"
+              className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-copper"
             >
               Clear all
             </button>
           )}
         </div>
 
-        {/* List */}
         <motion.ul layout className="mt-4 border-t border-black/10">
           <AnimatePresence mode="popLayout" initial={false}>
-            {results.map((p, i) => (
-              <PubRow key={p.id} p={p} i={i} showYearDivider={yearDividers[i]} year={p.year} />
-            ))}
+            {results.map((p, i) => <PubRow key={p.id} p={p} i={i} showYearDivider={yearDividers[i]} />)}
           </AnimatePresence>
         </motion.ul>
 
         {results.length === 0 && (
-          <div
-            data-testid="pub-empty"
-            className="py-20 font-display text-2xl uppercase tracking-tight text-graphite"
-          >
-            No publications match.
-          </div>
+          <div data-testid="pub-empty" className="py-20 font-display text-2xl uppercase tracking-tight text-graphite">No publications match.</div>
         )}
+
+        <p className="mt-12 eyebrow text-graphite/60">* Bold marks Dr. Peddy's authorship. Citation counts: Google Scholar, {PUB_STATS.asOf}. Source: VP_Annexure, pp. 24–34.</p>
       </section>
     </main>
   );

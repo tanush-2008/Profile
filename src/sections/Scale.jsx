@@ -102,8 +102,8 @@ export const Metrics = () => (
     {/* Source line */}
     <Reveal delay={0.3}>
       <div className="mt-20 flex items-center justify-between border-t border-black/08 pt-5 eyebrow text-graphite">
-        <span>Verified · Google Scholar</span>
-        <span className="hidden sm:block">As of 2024</span>
+        <span>Source · Google Scholar</span>
+        <span className="hidden sm:block">As of May 2026</span>
       </div>
     </Reveal>
   </section>

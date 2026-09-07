@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { SEO } from "@/components/SEO";
 
 const DomainAccordion = ({ d, i, open, onToggle }) => (
-  <Reveal delay={i * 0.04} data-testid={`research-domain-${d.id}`} className="border-b border-white/08">
+  <Reveal delay={i * 0.04} data-testid={`research-domain-${d.id}`} id={d.id} className="scroll-mt-24 border-b border-white/08">
     <button
       onClick={() => onToggle(d.id)}
       aria-expanded={open}
@@ -83,9 +83,10 @@ export default function Research() {
 
   return (
     <main data-testid="page-research">
-      <SEO 
-        title="Solid-State Research" 
-        description="Pharmaceutical solid-state science spanning eight interconnected disciplines — from molecular crystal engineering to industrial particle engineering." 
+      <SEO
+        title="Solid-State Research"
+        description="Eight interconnected disciplines — polymorphism, pharmaceutical co-crystals, crystallisation, particle engineering, amorphous systems, solid-state characterisation, crystal structure prediction and IP strategy."
+        path="/research"
       />
       {/* Header — asymmetric with watermark */}
       <section className="relative min-h-[70svh] overflow-hidden bg-ink px-6 pb-0 pt-36 text-bone lg:px-12 lg:pt-48">
@@ -125,19 +126,19 @@ export default function Research() {
           />
           <Reveal delay={0.5} className="mt-10 max-w-2xl">
             <p className="text-base leading-relaxed text-dust sm:text-lg">
-              Pharmaceutical solid-state science spans eight interconnected disciplines — from molecular crystal engineering to industrial particle engineering. Each demands expert command; together they determine whether a drug can be manufactured, stabilised and delivered.
+              Pharmaceutical solid-state science spans eight interconnected disciplines — from crystal engineering and polymorph screening to PAT-enabled crystallisation and particle engineering at plant scale. Together they determine whether a drug can be manufactured, stabilised, protected and filed.
             </p>
           </Reveal>
         </div>
 
         {/* Stats bar */}
         <Reveal delay={0.6}>
-          <div className="relative z-10 mt-16 grid grid-cols-4 gap-4 border-t border-white/08 pt-6 sm:grid-cols-4 eyebrow text-dust">
+          <div className="relative z-10 mt-16 grid grid-cols-4 gap-x-4 gap-y-8 border-t border-white/08 pt-6 sm:grid-cols-4 eyebrow text-dust">
             {[
-              ["300+", "Crystal structures solved"],
-              ["200+", "Solid forms assessed"],
-              ["200+", "Stability evaluations"],
-              ["40+", "Client programmes"],
+              ["300+", "Crystal structures solved & refined"],
+              [">200", "Solid forms assessed for novelty"],
+              ["200+", "Solid forms on ICH stability"],
+              ["40+", "Client programmes delivered"],
             ].map(([v, l]) => (
               <div key={l} className="col-span-2 sm:col-span-1">
                 <div className="font-display text-xl font-bold text-bone sm:text-2xl">{v}</div>

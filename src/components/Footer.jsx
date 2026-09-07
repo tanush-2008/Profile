@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-import { FOOTER_COLUMNS } from "@/lib/data";
+import { NavLink } from "react-router-dom";
+import { FOOTER_COLUMNS, CONTACT } from "@/lib/data";
 
 export const Footer = () => {
   return (
@@ -19,8 +19,11 @@ export const Footer = () => {
             </span>
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-dust">
-            Pharmaceutical scientist, researcher and inventor. Senior Director &amp; Head, Particle Science &amp; Engineering, Sai Life Sciences.
+            Pharmaceutical development R&amp;D leader in polymorphism, pharmaceutical co-crystals, crystallisation and particle engineering. Senior Director &amp; Head, Particle Science &amp; Engineering, Sai Life Sciences Ltd.
           </p>
+          <a href={`mailto:${CONTACT.emailPrimary}`} data-testid="footer-email" className="link-underline mt-4 inline-block text-sm text-bone/70 hover:text-bone">
+            {CONTACT.emailPrimary}
+          </a>
           <div className="mt-6 space-y-1.5">
             <div className="eyebrow text-dust flex items-center gap-2">
               <span className="h-1.5 w-1.5 bg-copper pulse-dot" />
@@ -29,7 +32,7 @@ export const Footer = () => {
           </div>
           <div className="mt-6 flex gap-5">
             <a
-              href="https://www.linkedin.com/in/vishweshwar-peddy"
+              href={CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="link-underline font-mono text-[10px] uppercase tracking-[0.22em] text-dust hover:text-bone"
@@ -38,7 +41,7 @@ export const Footer = () => {
               LinkedIn
             </a>
             <a
-              href="https://scholar.google.com/citations?user=vishweshwar-peddy"
+              href={CONTACT.scholar}
               target="_blank"
               rel="noopener noreferrer"
               className="link-underline font-mono text-[10px] uppercase tracking-[0.22em] text-dust hover:text-bone"
@@ -92,7 +95,7 @@ export const Footer = () => {
       {/* Bottom bar — condensed */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-y-3 border-t border-white/08 py-5 eyebrow text-dust mt-6">
         <span>© 2026 Dr. Vishweshwar Peddy</span>
-        <span className="text-dust/50">40 Publications · &gt;6,700 Citations · H-index 24 · 79 Patent Filings</span>
+        <span className="text-dust/50">40 Publications · &gt;6,700 Citations · H-index 24 · 79 Patent Filings · 14 Granted</span>
       </div>
     </footer>
   );

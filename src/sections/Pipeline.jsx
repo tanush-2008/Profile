@@ -26,7 +26,7 @@ export const Pipeline = () => {
         </div>
         <Reveal delay={0.2} className="col-span-12 lg:col-span-4 lg:col-start-9 flex flex-col justify-end">
           <p className="text-sm leading-relaxed text-dust sm:text-base max-w-sm">
-            Seven interconnected disciplines transform an active molecule into a stable, manufacturable pharmaceutical product.
+            Seven interconnected disciplines transform an active molecule into a stable, manufacturable pharmaceutical product — from in-silico solid-form prediction to plant validation and US-DMF filing.
           </p>
           <Link to="/innovation" className="btn-ghost mt-8 inline-flex self-start">
             See the full pipeline →

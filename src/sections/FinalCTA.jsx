@@ -1,5 +1,5 @@
 import { Reveal, SplitLines } from "@/components/motion";
-import { Link } from "react-router-dom";
+import { CONTACT } from "@/lib/data";
 
 export const FinalCTA = () => (
   <section data-testid="final-cta-section" className="relative bg-ink px-6 py-32 text-bone lg:px-12 lg:py-48 overflow-hidden">
@@ -22,7 +22,7 @@ export const FinalCTA = () => (
         </p>
         <div className="mt-8 space-y-4">
           <a
-            href="mailto:vishweshwar.peddy@sailifesciences.com"
+            href={`mailto:${CONTACT.emailPrimary}`}
             data-testid="cta-email"
             className="group flex items-center justify-between border border-white/15 px-6 py-4 transition-colors duration-500 hover:border-copper/60"
           >
@@ -32,7 +32,7 @@ export const FinalCTA = () => (
             <span className="font-mono text-[11px] text-dust group-hover:text-copper transition-colors duration-500">→</span>
           </a>
           <a
-            href="https://www.linkedin.com/in/vishweshwar-peddy"
+            href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="cta-linkedin"
@@ -45,7 +45,7 @@ export const FinalCTA = () => (
           </a>
         </div>
         <div className="mt-8 eyebrow text-dust">
-          Sai Life Sciences, Hyderabad
+          Sai Life Sciences Ltd. · Hyderabad, India
         </div>
       </Reveal>
     </div>

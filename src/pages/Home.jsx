@@ -10,7 +10,7 @@ import { SEO } from "@/components/SEO";
 export default function Home() {
   return (
     <main data-testid="home-page">
-      <SEO title="Home" />
+      <SEO path="/" />
       <Hero />
       <ScientificDomains />
       <Metrics />

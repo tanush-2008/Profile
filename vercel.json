@@ -1,8 +1,0 @@
-{
-  "framework": "vite",
-  "buildCommand": "yarn build",
-  "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/((?!assets/|documents/|images/|fonts/|favicon\\.svg|robots\\.txt|sitemap\\.xml).*)", "destination": "/index.html" }
-  ]
-}

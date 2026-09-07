@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import "@/App.css";
 import "lenis/dist/lenis.css";
 import Lenis from "lenis";
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Cursor } from "@/components/Cursor";
@@ -18,6 +16,7 @@ const Innovation = lazy(() => import("@/pages/Innovation"));
 const Publications = lazy(() => import("@/pages/Publications"));
 const Patents = lazy(() => import("@/pages/Patents"));
 const Career = lazy(() => import("@/pages/Career"));
+const Recognition = lazy(() => import("@/pages/Recognition"));
 const Contact = lazy(() => import("@/pages/Inbox"));
 
 const LABELS = {
@@ -27,6 +26,7 @@ const LABELS = {
   "/publications": "Publications",
   "/patents":      "Patents",
   "/career":       "Career",
+  "/recognition":  "Recognition",
   "/contact":      "Contact",
 };
 
@@ -72,7 +72,7 @@ const Curtain = ({ covering, label }) => (
 );
 
 const PageShell = ({ children }) => (
-  <div>
+  <div id="main">
     {children}
     <Footer />
   </div>
@@ -118,7 +118,9 @@ const AnimatedRoutes = () => {
           <Route path="/publications" element={<PageShell><Publications /></PageShell>} />
           <Route path="/patents"      element={<PageShell><Patents /></PageShell>} />
           <Route path="/career"       element={<PageShell><Career /></PageShell>} />
+          <Route path="/recognition"  element={<PageShell><Recognition /></PageShell>} />
           <Route path="/contact"      element={<PageShell><Contact /></PageShell>} />
+          <Route path="*"             element={<PageShell><Home /></PageShell>} />
         </Routes>
       </Suspense>
       <Curtain covering={covering} label={LABELS[location.pathname] || "Home"} />
@@ -131,16 +133,10 @@ function App() {
   return (
     <div className="App bg-ink" id="top">
       <BrowserRouter>
+        <a href="#main" className="skip-link" data-testid="skip-link">Skip to content</a>
         <Nav />
         <AnimatedRoutes />
         <Cursor />
-        <Toaster
-          theme="dark"
-          position="bottom-right"
-          toastOptions={{
-            className: "rounded-none border-white/15 bg-ink-2 text-bone font-sans",
-          }}
-        />
       </BrowserRouter>
     </div>
   );

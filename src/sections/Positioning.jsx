@@ -24,7 +24,7 @@ export const ScientificDomains = () => {
         </div>
         <div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
           <p className="text-sm leading-relaxed text-dust max-w-xs">
-            Pharmaceutical solid-state science from molecular crystal engineering to industrial particle design.
+            Pharmaceutical solid-state science — from crystal engineering and polymorph screening to PAT-enabled crystallisation and particle engineering at plant scale.
           </p>
         </div>
       </div>
