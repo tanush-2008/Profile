@@ -15,6 +15,26 @@ export default defineConfig({
     },
   },
   build: {
+    // Never ship source maps to the public — the single biggest code-leak vector.
+    sourcemap: false,
+    // Terser gives deeper compression + name mangling vs the default esbuild minifier.
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,   // strip all console.* calls
+        drop_debugger: true,  // strip debugger statements
+        passes: 3,            // multiple compression passes for smaller output
+      },
+      mangle: {
+        // Mangle all identifiers — makes the bundle much harder to read
+        toplevel: true,
+      },
+      format: {
+        // Ensure no sourceMappingURL comment is ever written
+        source_map: null,
+        comments: false,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
